@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TAXI DISPATCHER</title>
+  <title>DELIVERY DISPATCHER</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="css/taxi.css">
+  <link rel="stylesheet" href="css/shared.css">
   <script src="/vue/vue.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/leaflet/leaflet.js"></script>
@@ -13,23 +13,23 @@
 </head>
 <body>
   <h1>
-    TAXI DISPATCHER
+    DELIVERY DISPATCHER
   </h1>
   <div id="page">
     <div id="my-map"></div>
     <h1>Orders</h1>
     <ul>
       <li v-for="order in orders">
-        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
+        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }} Express/Processed: {{ order.expressOrAlreadyProcessed ? "Yes" : "No" }}
         <ul>
-          <li v-for="(item, key) in order.orderItems">
-            {{ key + ": " + item }}
+          <li v-for="(detail, key) in order.orderDetails">
+            {{ key + ": " + detail }}
           </li>
         </ul>
-        <select v-on:change="assignTaxi(order)" v-model="order.taxiId">
-          <option disabled value="">Assign a taxi</option>
-          <option v-for="taxi in taxis" :value="taxi.taxiId"># {{ taxi.taxiId}} Pos: {{ taxi.latLong[0].toFixed(3) }}, {{ taxi.latLong[1].toFixed(3) }} </option>
-        </select> {{ order.taxiIdConfirmed }}
+        <select v-on:change="assignDriver(order)" v-model="order.driverId">
+          <option disabled value="">Assign a driver</option>
+          <option v-for="driver in drivers" :value="driver.driverId"># {{ driver.driverId}} Pos: {{ driver.latLong.lat.toFixed(3) }}, {{ driver.latLong.lng.toFixed(3) }} </option>
+        </select> Assigned to driver #{{ order.driverId }}
       </li>
     </ul>
   </div>

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TAXI DRIVER</title>
+  <title>DELIVERY DRIVER</title>
   <link rel="stylesheet" href="leaflet/leaflet.css">
-  <link rel="stylesheet" href="css/taxi.css">
+  <link rel="stylesheet" href="css/shared.css">
   <script src="/vue/vue.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/leaflet/leaflet.js"></script>
@@ -14,20 +14,24 @@
 <body>
   <div id="page">
   	<h1>
-	    TAXI DRIVER # {{ taxiId }}
+      DELIVERY DRIVER # <input type="textfield" v-model="driverId"/> (enter your ID)
 	  </h1>
+    <p>Click in the map to position your truck and click again or drag the icon to move.</p>
     <div id="my-map"></div>
+    <br><br>
+    Specify your truck's cargo capacity (feel free to choose a reasonable unit of measurement): <input type="textfield" v-model="maxCapacity" @change="updateDriver"/>
     <ul>
-      <div v-for="order in orders" v-if="order.taxiId == taxiId">
-        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }}
+      <div v-for="order in orders" v-if="order.driverId == driverId">
+        # {{ order.orderId}} From: {{ order.fromLatLong[0].toFixed(3) }}, {{ order.fromLatLong[1].toFixed(3) }} Destination: {{ order.destLatLong[0].toFixed(3) }}, {{ order.destLatLong[1].toFixed(3) }} Express/Processed: {{ order.expressOrAlreadyProcessed ? "Yes" : "No" }}
         <ul>
-          <li v-for="item in order.orderItems">
-            {{ item }}
+          <li v-for="(detail, key) in order.orderDetails">
+            {{ key + ": " + detail }}
           </li>
         </ul>
-        <button v-on:click="acceptOrder(order)">ACCEPT</button><button v-on:click="finishOrder(order.orderId)">FINISH</button>
+        <button v-on:click="orderPickedUp(order)">Picked up!</button><button v-on:click="orderDroppedOff(order)">Dropped off!</button>
       </div>
     </ul>
+    <div v-if="driverLocation">Utilized capacity: {{ usedCapacity }}/{{ maxCapacity }}</div>
     <button v-on:click="quit">Quit</button>
   </div>
 </body>

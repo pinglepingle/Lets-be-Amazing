@@ -8,38 +8,47 @@ var vm = new Vue({
   el: '#page',
   data: {
     map: null,
-    taxiId: 0,
-    taxiLocation: null,
+    driverId: 1,
+    driverLocation: null,
+    maxCapacity: 30,
+    usedCapacity: 0,
     orders: {},
-    customerMarkers: {}
+    customerMarkers: {},
+    baseMarker: null
   },
   created: function () {
     socket.on('initialize', function (data) {
+      // add marker for home base in the map
+      this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
+      this.baseMarker.bindPopup("This is the dispatch and routing center");
+
       this.orders = data.orders;
     }.bind(this));
     socket.on('currentQueue', function (data) {
       this.orders = data.orders;
+      for (let key in this.orders) {
+        if (this.orders[key].driverId && this.orders[key].driverId == this.driverId) {
+          this.customerMarkers[this.orders[key].orderId] = this.putCustomerMarkers(this.orders[key]);
+        }
+      }
     }.bind(this));
-    // this icon is not reactive
-    this.taxiIcon = L.icon({
-      iconUrl: "img/taxi.png",
-      iconSize: [36,36],
-      iconAnchor: [18,36]
+
+    // these icons are not reactive
+    this.driverIcon = L.icon({
+      iconUrl: "img/driver.png",
+      iconSize: [36,20],
+      iconAnchor: [18,22]
     });
     this.fromIcon = L.icon({
-      iconUrl: "img/customer.png",
-      iconSize: [36,50],
-      iconAnchor: [19,50]
+      iconUrl: "img/box.png",
+      iconSize: [42,30],
+      iconAnchor: [21,34]
     });
-
-    //Helper function, should probably not be here
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-    // It's probably not a good idea to generate a random taxi number, client-side. 
-    this.taxiId = getRandomInt(1, 1000000);
+    this.baseIcon = L.icon({
+      iconUrl: "img/base.png",
+      iconSize: [40,40],
+      iconAnchor: [20,20]
+    });
   },
   mounted: function () {
     // set up the map
@@ -52,54 +61,76 @@ var vm = new Vue({
         attribution: osmAttrib,
         maxZoom: 18
     }).addTo(this.map);
-    this.map.on('click', this.setTaxiLocation);
+    this.map.on('click', this.setDriverLocation);
   },
   beforeDestroy: function () {
-    socket.emit('taxiQuit', this.taxiId);
+    socket.emit('driverQuit', this.driverId);
   },
   methods: {
-    setTaxiLocation: function (event) {
-      if (this.taxiLocation === null) {
-        this.taxiLocation = L.marker([event.latlng.lat, event.latlng.lng], {icon: this.taxiIcon, draggable: true}).addTo(this.map);
-        this.taxiLocation.on("drag", this.moveTaxi);
-        socket.emit("addTaxi", { taxiId: this.taxiId,
-                                latLong: [event.latlng.lat, event.latlng.lng]
-                                });
+    getDriverInfo: function () {
+      return  { driverId: this.driverId,
+        latLong: this.driverLocation.getLatLng(), 
+        maxCapacity: this.maxCapacity,
+        usedCapacity: this.usedCapacity
+      };
+    },
+    setDriverLocation: function (event) {
+      if (this.driverLocation === null) {
+        this.driverLocation = L.marker([event.latlng.lat, event.latlng.lng], {icon: this.driverIcon, draggable: true}).addTo(this.map);
+        this.driverLocation.on("drag", this.moveDriver);
+        socket.emit("addDriver", this.getDriverInfo());
       }
       else {
-        this.taxiLocation.setLatLng(event.latlng);
-        this.moveTaxi(event);
+        this.driverLocation.setLatLng(event.latlng);
+        this.moveDriver(event);
       }
     },
-    moveTaxi: function (event) {
-      socket.emit("moveTaxi", { taxiId: this.taxiId,
-                                latLong: [event.latlng.lat, event.latlng.lng]
-                                });
+    updateDriver: function () {
+      socket.emit("updateDriver", this.getDriverInfo());
+    },
+    moveDriver: function (event) {
+      socket.emit("moveDriver", this.getDriverInfo());
     },
     quit: function () {
-      this.map.removeLayer(this.taxiLocation);
-      this.taxiLocation = null;
-      socket.emit("taxiQuit", this.taxiId);
+      // TODO: This should perhaps only be possible when the driver is not assigned to any orders
+      this.map.removeLayer(this.driverLocation);
+      this.driverLocation = null;
+      socket.emit("driverQuit", this.driverId);
     },
-    acceptOrder: function (order) {
-        this.customerMarkers = this.putCustomerMarkers(order);
-        order.taxiIdConfirmed = this.taxiId;
-        socket.emit("orderAccepted", order);
+    orderPickedUp: function (order) {
+      // Update used capacity
+      this.usedCapacity += order.orderDetails.spaceRequired;
+
+      // TODO: Update polyline, remove last segment  
+      socket.emit("orderPickedUp", order);
     },
-    finishOrder: function (orderId) {
-      Vue.delete(this.orders, orderId);
-      this.map.removeLayer(this.customerMarkers.from);
-      this.map.removeLayer(this.customerMarkers.dest);
-      this.map.removeLayer(this.customerMarkers.line);
-      Vue.delete(this.customerMarkers);
-      socket.emit("finishOrder", orderId);
+    orderDroppedOff: function (order) {
+      // Update used capacity
+      this.usedCapacity -= order.orderDetails.spaceRequired;
+
+      Vue.delete(this.orders, order.orderId);
+      this.map.removeLayer(this.customerMarkers[order.orderId].from);
+      this.map.removeLayer(this.customerMarkers[order.orderId].dest);
+      this.map.removeLayer(this.customerMarkers[order.orderId].line);
+      Vue.delete(this.customerMarkers[order.orderId]);
+      socket.emit("orderDroppedOff", order.orderId);
+    },
+    // TODO: express and processed need to be separated to properly represent a
+    // non-express processed order (i.e. a regular order when going from the distribution
+    // terminal to final destination)
+    getPolylinePoints: function (order) {
+      if (order.expressOrAlreadyProcessed) {
+        return [order.fromLatLong, order.destLatLong];
+      } else {
+        return [order.fromLatLong, this.baseMarker.getLatLng()];
+      }
     },
     putCustomerMarkers: function (order) {
       var fromMarker = L.marker(order.fromLatLong, {icon: this.fromIcon}).addTo(this.map);
       fromMarker.orderId = order.orderId;
-      var destMarker = L.marker(order.destLatLong).addTo(this.map);
+      var destMarker = L.marker(order.expressOrAlreadyProcessed ? order.destLatLong : this.baseMarker.getLatLng()).addTo(this.map);
       destMarker.orderId = order.orderId;
-      var connectMarkers = L.polyline([order.fromLatLong, order.destLatLong], {color: 'blue'}).addTo(this.map);
+      var connectMarkers = L.polyline(this.getPolylinePoints(order), {color: 'blue'}).addTo(this.map);
       return {from: fromMarker, dest: destMarker, line: connectMarkers};
     },
   }

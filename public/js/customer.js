@@ -7,48 +7,35 @@ var socket = io();
 var vm = new Vue({
   el: '#page',
   data: {
+    express: null,
     orderId: null,
     map: null,
     fromMarker: null,
     destMarker: null,
-    taxiMarkers: {}
+    baseMarker: null,
+    driverMarkers: {}
   },
   created: function () {
     socket.on('initialize', function (data) {
-      // add taxi markers in the map for all taxis
-      for (var taxiId in data.taxis) {
-        this.taxiMarkers[taxiId] = this.putTaxiMarker(data.taxis[taxiId]);
-      }
+      // add marker for home base in the map
+      this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
+      this.baseMarker.bindPopup("This is the dispatch and routing center");
     }.bind(this));
     socket.on('orderId', function (orderId) {
       this.orderId = orderId;
     }.bind(this));
-    socket.on('taxiAdded', function (taxi) {
-      this.taxiMarkers[taxi.taxiId] = this.putTaxiMarker(taxi);
-    }.bind(this));
-
-    socket.on('taxiMoved', function (taxi) {
-      this.taxiMarkers[taxi.taxiId].setLatLng(taxi.latLong);
-    }.bind(this));
-
-    socket.on('taxiQuit', function (taxiId) {
-      this.map.removeLayer(this.taxiMarkers[taxiId]);
-      Vue.delete(this.taxiMarkers, taxiId);
-    }.bind(this));
 
     // These icons are not reactive
-    this.taxiIcon = L.icon({
-      iconUrl: "img/taxi.png",
-      iconSize: [36,36],
-      iconAnchor: [18,36],
-      popupAnchor: [0,-36]
-    });
-
     this.fromIcon = L.icon({
-          iconUrl: "img/customer.png",
-          iconSize: [36,50],
-          iconAnchor: [19,50]
-        });
+      iconUrl: "img/box.png",
+      iconSize: [42,30],
+      iconAnchor: [21,34]
+    });
+    this.baseIcon = L.icon({
+      iconUrl: "img/base.png",
+      iconSize: [40,40],
+      iconAnchor: [20,20]
+    });
   },
   mounted: function () {
     // set up the map
@@ -80,33 +67,39 @@ var vm = new Vue({
     }.bind(this));
   },
   methods: {
-    putTaxiMarker: function (taxi) {
-      var marker = L.marker(taxi.latLong, {icon: this.taxiIcon}).addTo(this.map);
-      marker.bindPopup("Taxi " + taxi.taxiId);
-      marker.taxiId = taxi.taxiId;
-      return marker;
+    placeOrder: function() {
+      socket.emit("placeOrder", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
+        destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
+        expressOrAlreadyProcessed: this.express ? true : false,
+        orderDetails: { pieces: 1, spaceRequired: 3, totalGrams: 5600,  driverInstructions: "Beware of the dog" }
+      });
     },
-    orderTaxi: function() {
-            socket.emit("orderTaxi", { fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
-                                       destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
-                                       orderItems: { passengers: 1, bags: 1, animals: "doge" }
-                                     });
+    getPolylinePoints: function() {
+      if (this.express) {
+        return [this.fromMarker.getLatLng(), this.destMarker.getLatLng()];
+      } else {
+        return [this.fromMarker.getLatLng(), this.baseMarker.getLatLng(), this.destMarker.getLatLng()];
+      }
     },
     handleClick: function (event) {
-      // first click sets destination
-      if (this.destMarker === null) {
-        this.destMarker = L.marker([event.latlng.lat, event.latlng.lng], {draggable: true}).addTo(this.map);
-        this.destMarker.on("drag", this.moveMarker);
-      }
-      // second click sets pickup location
-      else if (this.fromMarker === null) {
+      // first click sets pickup location
+      if (this.fromMarker === null) {
         this.fromMarker = L.marker(event.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
         this.fromMarker.on("drag", this.moveMarker);
-        this.connectMarkers = L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
+      }
+      // second click sets destination
+      else if (this.destMarker === null) {
+        this.destMarker = L.marker([event.latlng.lat, event.latlng.lng], {draggable: true}).addTo(this.map);
+        this.destMarker.on("drag", this.moveMarker);
+        this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map);
+      } 
+      // subsequent clicks assume moved markers
+      else {
+        this.moveMarker();
       }
     },
     moveMarker: function (event) {
-      this.connectMarkers.setLatLngs([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'});
+      this.connectMarkers.setLatLngs(this.getPolylinePoints(), {color: 'blue'});
       /*socket.emit("moveMarker", { orderId: event.target.orderId,
                                 latLong: [event.target.getLatLng().lat, event.target.getLatLng().lng]
                                 });

@@ -40,7 +40,8 @@ app.get('/dispatcher', function (req, res) {
 // prepare for multiple instances of data if necessary
 function Data() {
   this.orders = {};
-  this.taxis = {};
+  this.drivers = {};
+  this.baseLatLong = { "lat": 59.84091407485801, "lng": 17.64924108548685 };
   this.currentOrderNumber = 1000;
 }
 
@@ -51,7 +52,7 @@ Data.prototype.getOrderNumber = function () {
 }
 
 /*
-  Adds an order to to the queue
+  Adds an order to the queue
 */
 Data.prototype.addOrder = function (order) {
   var orderId = this.getOrderNumber();
@@ -61,9 +62,9 @@ Data.prototype.addOrder = function (order) {
 };
 
 /*
-  Just deleting the order when it's finished
+  Delete the order when it's considered finished
 */
-Data.prototype.finishOrder = function (orderId) {
+Data.prototype.orderDropOff = function (orderId) {
     delete this.orders[orderId];
 };
 
@@ -80,71 +81,85 @@ Data.prototype.getAllOrders = function () {
   return this.orders;
 };
 
-Data.prototype.addTaxi = function (taxi) {
-  //Store the order in an "associative array" with orderId as key
-  this.taxis[taxi.taxiId] = taxi;
+Data.prototype.addDriver = function (driver) {
+  //Store info about the drivers in an "associative array" with driverId as key
+  this.drivers[driver.driverId] = driver;
 };
 
-Data.prototype.updateTaxiDetails = function (taxi) {
-  for (var key in taxi) {
-    this.taxis[taxi.taxiId][key] = taxi[key];
+Data.prototype.updateDriverDetails = function (driver) {
+  for (var key in driver) {
+    this.drivers[driver.driverId][key] = driver[key];
   }
 };
 
-Data.prototype.removeTaxi = function (taxiId) {
-    delete this.taxis[taxiId];
+Data.prototype.removeDriver = function (driverId) {
+    delete this.drivers[driverId];
 };
 
-Data.prototype.getAllTaxis = function () {
-  return this.taxis;
+Data.prototype.getAllDrivers = function () {
+  return this.drivers;
 };
 
 
 var data = new Data();
 
 io.on('connection', function (socket) {
-  // Send list of orders when a client connects
+  // Send the current lists of orders and drivers when a client connects
   socket.emit('initialize', { orders: data.getAllOrders(),
-                              taxis: data.getAllTaxis() });
-  // Add a listener for when a connected client emits an "orderTaxi" message
-  socket.on('orderTaxi', function (order) {
+                              drivers: data.getAllDrivers(), base: data.baseLatLong });
+  // Add a listener for when a connected client emits a "placeOrder" message
+  socket.on('placeOrder', function (order) {
     var orderId = data.addOrder(order);
     order.orderId = orderId;
+    console.log("An order was placed:",order);
     // send updated info to all connected clients, note the use of "io" instead of "socket"
-    io.emit('taxiOrdered', order);
+    io.emit('orderPlaced', order);
     // send the orderId back to the customer who ordered
     socket.emit('orderId', orderId);
   });
-  socket.on('addTaxi', function (taxi) {
-    data.addTaxi(taxi);
-    // send updated info to all connected clients, note the use of io instead of socket
-    io.emit('taxiAdded', taxi);
-  });
-  socket.on('moveTaxi', function (taxi) {
-    data.updateTaxiDetails(taxi);
-    // send updated info to all connected clients, note the use of io instead of socket
-    io.emit('taxiMoved', taxi);
-  });
-  socket.on('taxiQuit', function (taxi) {
-    data.removeTaxi(taxi);
-    console.log("Taxi",taxi,"has left the job");
-    // send updated info to all connected clients, note the use of io instead of socket
-    io.emit('taxiQuit', taxi);
-  });
-  socket.on('finishOrder', function (orderId) {
-    data.finishOrder(orderId);
-    // send updated info to all connected clients, note the use of io instead of socket
-    io.emit('orderFinished', orderId);
-  });
 
-  socket.on('taxiAssigned', function(order) {
+  socket.on('addDriver', function (driver) {
+    data.addDriver(driver);
+    console.log("Driver",driver,"is on the job");
+    // send updated info to all connected clients, note the use of io instead of socket
+    io.emit('driverAdded', driver);
+  });
+  socket.on('updateDriver', function (driver) {
+    console.log("Driver", driver.driverId,"was updated");
+    data.updateDriverDetails(driver);
+    // send updated info to all connected clients, note the use of io instead of socket
+    io.emit('driverUpdated', driver);
+  });
+socket.on('moveDriver', function (driver) {
+    console.log("Driver", driver.driverId,"moved to",driver.latLong);
+    data.updateDriverDetails(driver);
+    // send updated info to all connected clients, note the use of io instead of socket
+    io.emit('driverMoved', driver);
+  });
+  socket.on('driverQuit', function (driver) {
+    data.removeDriver(driver);
+    console.log("Driver",driver,"has left the job");
+    // send updated info to all connected clients, note the use of io instead of socket
+    io.emit('driverQuit', driver);
+  });
+  
+  socket.on('orderPickedUp', function(order) {
+    console.log("Order",order.orderId,"was picked up");
+    data.updateOrderDetails(order);
+    io.emit('orderPickedUp', order );
+  });
+  socket.on('driverAssigned', function(order) {
+    // Track assigned driver by adding driverId to the order
+    console.log("Order",order.orderId,"was assigned to driver",order.driverId);
     data.updateOrderDetails(order);
     io.emit('currentQueue', { orders: data.getAllOrders() });
   });
-  socket.on('orderAccepted', function(order) {
-    data.updateOrderDetails(order);
-    io.emit('orderAccepted', order );
-  })
+  socket.on('orderDroppedOff', function (orderId) {
+    console.log("Order",orderId,"was dropped off");
+    data.orderDropOff(orderId);
+    // send updated info to all connected clients, note the use of io instead of socket
+    io.emit('orderDroppedOff', orderId);
+  });
 });
 
 var server = http.listen(app.get('port'), function () {

@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TAXI CUSTOMER</title>
-  <link rel="stylesheet" href="leaflet/leaflet.css">
+  <title>DELIVERY CUSTOMER</title>
+  <link rel="stylesheet" href="/leaflet/leaflet.css">
   <link rel="stylesheet" href="/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
-  <link rel="stylesheet" href="css/taxi.css">
+  <link rel="stylesheet" href="css/shared.css">
   <script src="/vue/vue.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/leaflet/leaflet.js"></script>
@@ -16,12 +16,13 @@
 </head>
 <body>
   <h1>
-    TAXI CUSTOMER 
+    DELIVERY CUSTOMER 
   </h1>
-  <p>Select destination first, then your location</p>
+  <p>Select pickup location first, then your parcel's destination</p>
   <div id="page">
-    <div id="my-map"></div>
-    <button v-on:click="orderTaxi">ORDER TAXI</button>
+    <div id="my-map"></div><br>
+    <input type="checkbox" v-model="express" @change="moveMarker" name="express" value="express">Check this box for express delivery!</input><br><br>
+    <button v-on:click="placeOrder">ORDER DELIVERY</button>
     Your order number is {{ orderId }}
   </div>
 </body>
