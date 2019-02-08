@@ -1,4 +1,4 @@
-#Let's be Amazing!
+# Let's be Amazing!
 
 ## 1md034-project-skeleton
 This skeleton code gives a folder structure and some basic communication patterns to quickly build prototypes of real-time map-based apps.
