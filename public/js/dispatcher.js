@@ -18,9 +18,12 @@ var vm = new Vue({
     socket.on('initialize', function (data) {
       this.orders = data.orders;
       this.drivers = data.drivers;
+
+
       // add marker for home base in the map
       this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
       this.baseMarker.bindPopup("This is the dispatch and routing center");
+
       // add markers in the map for all orders
       for (var orderId in data.orders) {
         this.customerMarkers[orderId] = this.putCustomerMarkers(data.orders[orderId]);

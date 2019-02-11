@@ -4,6 +4,37 @@
 'use strict';
 var socket = io();
 
+
+
+
+/*
+
+Data in a order
+
+{ 
+  "fromLatLong": [ 
+      59.8490512210841, 
+      17.600974144749024 
+    ], 
+  "destLatLong": [ 
+      59.824273134566155,
+      17.615737300325847 
+    ], 
+  "expressOrAlreadyProcessed": false, 
+  "orderDetails": { 
+      "pieces": 1, 
+      "spaceRequired": 3, 
+      "totalGrams": 5600, 
+      "driverInstructions": 
+      "Beware of the dog" 
+    }, 
+  "orderId": 1004, 
+  "driverId": 1 
+}
+
+*/
+
+
 var vm = new Vue({
   el: '#page',
   data: {
@@ -14,7 +45,8 @@ var vm = new Vue({
     usedCapacity: 0,
     orders: {},
     customerMarkers: {},
-    baseMarker: null
+    baseMarker: null,
+    visibility: 'visible'
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -22,6 +54,9 @@ var vm = new Vue({
       this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
       this.baseMarker.bindPopup("This is the dispatch and routing center");
 
+      // Added for sending driver location to base
+      this.driverLocation = L.marker(data.base, {icon: this.driverIcon}).addTo(this.map);
+      socket.emit("addDriver", this.getDriverInfo());
       this.orders = data.orders;
     }.bind(this));
     socket.on('currentQueue', function (data) {
@@ -49,8 +84,10 @@ var vm = new Vue({
       iconSize: [40,40],
       iconAnchor: [20,20]
     });
+
   },
   mounted: function () {
+
     // set up the map
     this.map = L.map('my-map').setView([59.8415,17.648], 13);
 
@@ -68,7 +105,8 @@ var vm = new Vue({
   },
   methods: {
     getDriverInfo: function () {
-      return  { driverId: this.driverId,
+      return  { 
+        driverId: this.driverId,
         latLong: this.driverLocation.getLatLng(), 
         maxCapacity: this.maxCapacity,
         usedCapacity: this.usedCapacity
@@ -93,17 +131,30 @@ var vm = new Vue({
     },
     quit: function () {
       // TODO: This should perhaps only be possible when the driver is not assigned to any orders
-      this.map.removeLayer(this.driverLocation);
-      this.driverLocation = null;
-      socket.emit("driverQuit", this.driverId);
+      if (this.usedCapacity === 0) {
+        this.map.removeLayer(this.driverLocation);
+        this.driverLocation = null;
+        socket.emit("driverQuit", this.driverId);
+      }
+      else
+        alert("Can't quit, still have packages in your truck");
     },
     orderPickedUp: function (order) {
+      var pickUp = this.orders.orderId;
+      // this.orders
       // Update used capacity
-      this.usedCapacity += order.orderDetails.spaceRequired;
+      
+      if (+this.usedCapacity + +order.orderDetails.spaceRequired > this.maxCapacity)
+        return;
+      else {
+        this.usedCapacity = +order.orderDetails.spaceRequired + +this.usedCapacity;
+        order.handled = true;
+      }    
 
       // TODO: Update polyline, remove last segment  
       socket.emit("orderPickedUp", order);
     },
+
     orderDroppedOff: function (order) {
       // Update used capacity
       this.usedCapacity -= order.orderDetails.spaceRequired;
@@ -133,5 +184,10 @@ var vm = new Vue({
       var connectMarkers = L.polyline(this.getPolylinePoints(order), {color: 'blue'}).addTo(this.map);
       return {from: fromMarker, dest: destMarker, line: connectMarkers};
     },
+  },
+  computed: {
+    computeVisibility: function (event) {
+      return this.visibility;
+    }
   }
 });
