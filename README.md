@@ -2,9 +2,9 @@
 
 ## Uppgifter till Workshop
 
-Kund - Beställ ett paket med leverans till studentvägen./br
-Supervisor - Assigna ett paket till en ledig förare.
-Driver - Ring kunden och säg att du är framme och meddela supervisorn att du lämnat paketet.
+1. Kund - Beställ ett paket med leverans till studentvägen.
+2. Supervisor - Assigna ett paket till en ledig förare.
+3. Driver - Ring kunden och säg att du är framme och meddela supervisorn att du lämnat paketet.
 
 ## 1md034-project-skeleton
 This skeleton code gives a folder structure and some basic communication patterns to quickly build prototypes of real-time map-based apps.
