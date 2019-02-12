@@ -1,5 +1,11 @@
 # Let's be Amazing!
 
+## Uppgifter till Workshop
+
+Kund - Beställ ett paket med leverans till studentvägen.
+Supervisor - Assigna ett paket till en ledig förare
+Driver - Ring kunden och säg att du är framme och meddela supervisorn att du lämnat paketet.
+
 ## 1md034-project-skeleton
 This skeleton code gives a folder structure and some basic communication patterns to quickly build prototypes of real-time map-based apps.
 
