@@ -3,7 +3,7 @@
 ## Uppgifter till Workshop
 
 Kund - Beställ ett paket med leverans till studentvägen.
-Supervisor - Assigna ett paket till en ledig förare
+Supervisor - Assigna ett paket till en ledig förare.
 Driver - Ring kunden och säg att du är framme och meddela supervisorn att du lämnat paketet.
 
 ## 1md034-project-skeleton
