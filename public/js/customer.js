@@ -13,9 +13,9 @@ var vm = new Vue({
     fromMarker: null,
     destMarker: null,
     baseMarker: null,
-    spaceRequired: 0, 
-    totalGrams: 0, 
-    driverInstructions: "", 
+    spaceRequired: 0,
+    totalGrams: 0,
+    driverInstructions: "",
     driverMarkers: {}
   },
   created: function () {
@@ -61,7 +61,7 @@ var vm = new Vue({
     // useMapBounds: false <-- Enable to search for all
     var searchDestControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "Destination"}).addTo(this.map)
     var searchFromControl = L.esri.Geocoding.geosearch({allowMultipleResults: false, zoomToResult: false, placeholder: "From"}).addTo(this.map);
-  
+
    // listen for the results event and add the result to the map
     searchDestControl.on("results", function(data) {
         // Ensure to only add one search to map
@@ -73,17 +73,17 @@ var vm = new Vue({
         else {
           alert("Can only pick up order from one place at a time");
         }
-        
+
         // Check if one can draw the marker distance
       if(this.fromMarker !== null) {
-        this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map); 
+        this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map);
                               // L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
       }
     }.bind(this));
 
     // listen for the results event and add the result to the map
     searchFromControl.on("results", function(data) {
-      // Ensure to add only one search 
+      // Ensure to add only one search
       if(this.fromMarker === null) {
         this.fromMarker = L.marker(data.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
         this.fromMarker.on("drag", this.moveMarker);
@@ -94,7 +94,7 @@ var vm = new Vue({
 
       // Check if one can draw the marker distance
       if(this.destMarker !== null) {
-        this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map); 
+        this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map);
                               // L.polyline([this.fromMarker.getLatLng(), this.destMarker.getLatLng()], {color: 'blue'}).addTo(this.map);
       }
     }.bind(this));
@@ -102,20 +102,20 @@ var vm = new Vue({
   },
   methods: {
     placeOrder: function() {
-      socket.emit("placeOrder", { 
+      socket.emit("placeOrder", {
         fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
         destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
         expressOrAlreadyProcessed: this.express ? true : false,
         handled: false,
-        orderDetails: { 
-                        pieces: 1, 
-                        spaceRequired: this.spaceRequired, 
-                        totalGrams: this.totalGrams, 
-                        driverInstructions: this.driverInstructions 
+        orderDetails: {
+                        pieces: 1,
+                        spaceRequired: this.spaceRequired,
+                        totalGrams: this.totalGrams,
+                        driverInstructions: this.driverInstructions
                       }
       });
 
-      
+
     },
     getPolylinePoints: function() {
       if (this.express) {
@@ -135,7 +135,7 @@ var vm = new Vue({
         this.destMarker = L.marker([event.latlng.lat, event.latlng.lng], {draggable: true}).addTo(this.map);
         this.destMarker.on("drag", this.moveMarker);
         this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map);
-      } 
+      }
       // subsequent clicks assume moved markers
       else {
         this.moveMarker();
@@ -147,7 +147,7 @@ var vm = new Vue({
       // socket.emit("moveMarker", { orderId: event.target.orderId,
       //                           latLong: [event.target.getLatLng().lat, event.target.getLatLng().lng]
       //                           });
-                                
+
     }
   }
 });
