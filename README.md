@@ -1,4 +1,13 @@
-# 1md034-project-skeleton
+# Let's be Amazing!
+
+## Uppgifter till Workshop
+
+1. Kund - Beställ ett paket med leverans till studentvägen.
+2. Supervisor - Assigna ett paket till en ledig förare.
+3. Driver - Ring kunden och säg att du är framme och meddela supervisorn att du lämnat paketet.
+
+## 1md034-project-skeleton
+
 This skeleton code gives a folder structure and some basic communication patterns to quickly build prototypes of real-time map-based apps.
 
 With only fundamental pattern matching abilities and basic HTML/CSS/JS knowledge you will be able to create functional prototypes of taxi services. The skeleton code makes use of the modules/frameworks [express js](https://expressjs.com), [socket.io](http://socket.io), [vue js](https://vuejs.org/), [leaflet js](http://leafletjs.com/), and [esri leaflet geocoder](https://github.com/Esri/esri-leaflet-geocoder) but for prototyping purposes you will most likely not need to understand these libraries very well.
