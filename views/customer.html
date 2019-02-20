@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DELIVERY CUSTOMER</title>
+  <title>Amazing Transport</title>
   <link rel="stylesheet" href="/leaflet/leaflet.css">
   <link rel="stylesheet" href="/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
   <link rel="stylesheet" href="css/shared.css">
@@ -19,6 +19,7 @@
   <script src="js/customer.js" defer></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" defer />
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
+
 </head>
 
 <style>
@@ -28,21 +29,43 @@
 </style>
 
 
-
-
-
 <body>
-  <a href="/" target="_blank">Open another customer view</a> |
-  <a href="/dispatcher" target="_blank">Open dispatcher view</a> |
-  <a href="/driver" target="_blank">Open driver view</a>
-  <h1>
-    DELIVERY CUSTOMER
-  </h1>
-  <p>Select pickup location first, then your parcel's destination</p>
-  <div id="page">
-    <div id="my-map"></div><br>
+  <div class="menubar">
+    <a href="/" target="_blank">Customer view</a>
+    <a href="/dispatcher" target="_blank">Dispatcher view</a>
+    <a href="/driver" target="_blank">Driver view</a>
+  </div>
+  <header id="header">
+    <div id="headerPic" style="background-image: url(https://www.volkswagen-transportbilar.se/content/dam/vw-ngw/vw_nfz/importers/se/kampanjer/caddy-och-transporter-ski-team-2019/16-9/volkswagen-caddy-transporter-skiteam-stage-vinter-16-9.jpg/jcr:content/renditions/original.transform/max/img.jpg);"></div>
+    <h3 id="welcomeText">Welcome to</h3>
+    <h1 id="headerText">Amazing Transport</h1>
+    <h2 id="click-here">Click here to send a package</h2>
+    <a class="bounce" href="#test">
+    <img class="arrow" src="https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png">
+  </a>
+  </header>
 
+  <div id="test" class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1151/v1508333403/fileadmin/Skigebiet_Grindelwald-First/Bachalpsee-Winter-Schnee-Wetterhorn-Schreckhorn-Panorama.jpg);"></div>
+  <div class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1359/v1508331713/fileadmin/Skigebiet_Grindelwald-First/Winterwandern-Grindelwald-First-Alpen-Panorama-Nebelmeer.jpg);"></div>
+
+  <!---<p>Select pickup location first, then your parcel's destination</p>--->
+  <div id="page">
+    <h2 id="choose">Click on the map to first choose a pick-up address and then again to choose the delivery address</h2>
+    <div id="my-map"></div><br>
     <br><br>
+
+    <div class="transbox">
+    </div>
+
+    <div class="transboxsecond">
+    </div>
+
+    <form id="infoPickup">
+      <h2>Pick-up Information</h2>
+      <input type="text" name="field1" placeholder="Your Name *"><br><br>
+      <input type="email" name="field2" placeholder="Your Email *"><br><br>
+      <input type="text" name="field3" placeholder="Your Phonenumber *"><br><br>
+  </form>
 
     <form id="custumerDetails">
       <ul>
