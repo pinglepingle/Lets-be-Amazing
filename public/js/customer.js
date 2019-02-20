@@ -148,6 +148,7 @@ var vm = new Vue({
       //                           latLong: [event.target.getLatLng().lat, event.target.getLatLng().lng]
       //                           });
 
+
     },
     swish: function(event) {
       document.getElementById('swish').style.display ='block';
@@ -163,6 +164,7 @@ var vm = new Vue({
       document.getElementById('invoice').style.display ='block';
       document.getElementById('swish').style.display ='none';
       document.getElementById('creditCard').style.display ='none';
+
     }
   }
 });
