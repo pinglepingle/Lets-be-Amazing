@@ -1,114 +1,132 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amazing Transport</title>
+  <link rel="stylesheet" href="/leaflet/leaflet.css">
+  <link rel="stylesheet" href="/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="/vue/vue.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/leaflet/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+  <script src="/esri-leaflet/esri-leaflet.js"></script>
+  <script src="/esri-leaflet-geocoder/esri-leaflet-geocoder.js"></script>
+  <script src="js/customer.js" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" defer />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DELIVERY CUSTOMER</title>
-    <link rel="stylesheet" href="/leaflet/leaflet.css">
-    <link rel="stylesheet" href="/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
-    <link rel="stylesheet" href="css/shared.css">
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="/vue/vue.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/leaflet/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
-    <script src="/esri-leaflet/esri-leaflet.js"></script>
-    <script src="/esri-leaflet-geocoder/esri-leaflet-geocoder.js"></script>
-    <script src="js/customer.js" defer></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" defer />
-    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
-  </head>
+</head>
 
-  <style>
-    #customerDetails {
-        width: 50%;
-        float: left;
+<style>
+  #custumerDetails {
+      width: 60%;
     }
-
-    #recieverDetails {
-        width: 50%;
-        float: right;
-    }
-  </style>
+</style>
 
 
-  <body>
-    <a href="/" target="_blank">Open another customer view</a> |
-    <a href="/dispatcher" target="_blank">Open dispatcher view</a> |
-    <a href="/driver" target="_blank">Open driver view</a>
-    <h1>
-      DELIVERY CUSTOMER
-    </h1>
-    <p>Select pickup location first, then your parcel's destination</p>
-    <div id="page">
-      <div id="my-map"></div><br>
+<body>
+  <div class="menubar">
+    <a href="/" target="_blank">Customer view</a>
+    <a href="/dispatcher" target="_blank">Dispatcher view</a>
+    <a href="/driver" target="_blank">Driver view</a>
+  </div>
+  <header id="header">
+    <div id="headerPic" style="background-image: url(https://www.volkswagen-transportbilar.se/content/dam/vw-ngw/vw_nfz/importers/se/kampanjer/caddy-och-transporter-ski-team-2019/16-9/volkswagen-caddy-transporter-skiteam-stage-vinter-16-9.jpg/jcr:content/renditions/original.transform/max/img.jpg);"></div>
+    <h3 id="welcomeText">Welcome to</h3>
+    <h1 id="headerText">Amazing Transport</h1>
+    <h2 id="click-here">Click here to send a package</h2>
+    <a class="bounce" href="#test">
+    <img class="arrow" src="https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png">
+  </a>
+  </header>
 
-      <br><br>
+  <div id="test" class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1151/v1508333403/fileadmin/Skigebiet_Grindelwald-First/Bachalpsee-Winter-Schnee-Wetterhorn-Schreckhorn-Panorama.jpg);"></div>
+  <div class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1359/v1508331713/fileadmin/Skigebiet_Grindelwald-First/Winterwandern-Grindelwald-First-Alpen-Panorama-Nebelmeer.jpg);"></div>
 
-      <form id="customerDetails">
-       <h2>Customer details</h2> 
-        <ul>
-          <li>
-            <label>Name</label> <br>
-            <input type="text" required>
-          </li>
-          <li>
-            <label>E-Mail</label> <br>
-            <input type="email" name="email" required=""><br>
-          </li>
-          <li>
-            <label>Express Delivery</label> <br>
-            <input type="checkbox" v-model="express" @change="moveMarker" name="express" value="express">Check this box
-            for
-            express delivery!
-            <br>
-            <br>
-          </li>
-          <div>
-            <h4>Choose your payment method:</h4>
-            <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
-            <label for="swish">Swish</label>
-            <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
-            Credit Card
-            <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
-            Invoice
-          </div>
-          <div class="hide" id="swish">
-            <label>Phone number</label> <br>
-            <input type="text" required>
-          </div>
-          <div class="hide" id="creditCard">
-            <label>Name of card holder</label> <br>
-            <input type="text" required><br>
-            <label>Card number</label> <br>
-            <!---<input type="text" required><br>-->
-            <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
-            -
-            <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
-            -
-            <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
-            -
-            <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
-            <br />
-            <label>Expire date</label> <br>
-            <select name='expireMM' id='expireMM'>
-              <option value=''>Month</option>
-              <option value='01'>January</option>
-              <option value='02'>February</option>
-              <option value='03'>March</option>
-              <option value='04'>April</option>
-              <option value='05'>May</option>
-              <option value='06'>June</option>
-              <option value='07'>July</option>
-              <option value='08'>August</option>
-              <option value='09'>September</option>
-              <option value='10'>October</option>
-              <option value='11'>November</option>
-              <option value='12'>December</option>
-            </select>
-            <select name='expireYY' id='expireYY'>
+  <!---<p>Select pickup location first, then your parcel's destination</p>--->
+  <div id="page">
+    <h2 id="choose">Click on the map to first choose a pick-up address and then again to choose the delivery address</h2>
+    <div id="my-map"></div><br>
+    <br><br>
+
+    <div class="transbox">
+    </div>
+
+    <div class="transboxsecond">
+    </div>
+
+    <form id="infoPickup">
+      <h2>Pick-up Information</h2>
+      <input type="text" name="field1" placeholder="Your Name *"><br><br>
+      <input type="email" name="field2" placeholder="Your Email *"><br><br>
+      <input type="text" name="field3" placeholder="Your Phonenumber *"><br><br>
+  </form>
+
+    <form id="custumerDetails">
+      <ul>
+        <li>
+          <label>Name</label> <br>
+          <input type="text" required>
+        </li>
+        <li>
+          <label>E-Mail</label> <br>
+          <input type="email" name="email" required=""><br>
+        </li>
+        <li>
+          <label>Express Delivery</label> <br>
+          <input type="checkbox" v-model="express" @change="moveMarker" name="express" value="express">Check this box
+          for
+          express delivery!
+          <br>
+          <br>
+        </li>
+        <div>
+          <h4>Choose your payment method:</h4>
+          <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
+          <label for="swish">Swish</label>
+          <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
+          Credit Card
+          <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
+          Invoice
+        </div>
+        <div class="hide" id="swish">
+          <label>Phone number</label> <br>
+          <input type="text" required>
+        </div>
+        <div class="hide" id="creditCard">
+          <label>Name of card holder</label> <br>
+          <input type="text" required><br>
+          <label>Card number</label> <br>
+          <!---<input type="text" required><br>-->
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
+          <br />
+          <label>Expire date</label> <br>
+          <select name='expireMM' id='expireMM'>
+            <option value=''>Month</option>
+            <option value='01'>January</option>
+            <option value='02'>February</option>
+            <option value='03'>March</option>
+            <option value='04'>April</option>
+            <option value='05'>May</option>
+            <option value='06'>June</option>
+            <option value='07'>July</option>
+            <option value='08'>August</option>
+            <option value='09'>September</option>
+            <option value='10'>October</option>
+            <option value='11'>November</option>
+            <option value='12'>December</option>
+          </select>
+          <select name='expireYY' id='expireYY'>
               <option value=''>Year</option>
               <option value='19'>2019</option>
               <option value='20'>2020</option>
