@@ -148,6 +148,23 @@ var vm = new Vue({
       //                           latLong: [event.target.getLatLng().lat, event.target.getLatLng().lng]
       //                           });
 
+
+    },
+    swish: function(event) {
+      document.getElementById('swish').style.display ='block';
+      document.getElementById('creditCard').style.display ='none';
+      document.getElementById('invoice').style.display ='none';
+    },
+    creditCard: function(event) {
+      document.getElementById('creditCard').style.display ='block';
+      document.getElementById('swish').style.display ='none';
+      document.getElementById('invoice').style.display ='none';
+    },
+    invoice: function(event) {
+      document.getElementById('invoice').style.display ='block';
+      document.getElementById('swish').style.display ='none';
+      document.getElementById('creditCard').style.display ='none';
+
     }
   }
 });
