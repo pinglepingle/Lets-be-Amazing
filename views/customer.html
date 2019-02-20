@@ -62,14 +62,77 @@
           <br>
           <br>
         </li>
-        <li>
+        <div>
+          <h4>Choose your payment method:</h4>
+          <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
+          <label for="swish">Swish</label>
+          <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
+          Credit Card
+          <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
+          Invoice
+        </div>
+        <div class="hide" id="swish">
+          <label>Phone number</label> <br>
+          <input type="text" required>
+        </div>
+        <div class="hide" id="creditCard">
+          <label>Name of card holder</label> <br>
+          <input type="text" required><br>
+          <label>Card number</label> <br>
+          <!---<input type="text" required><br>-->
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
+          <br />
+          <label>Expire date</label> <br>
+          <select name='expireMM' id='expireMM'>
+            <option value=''>Month</option>
+            <option value='01'>January</option>
+            <option value='02'>February</option>
+            <option value='03'>March</option>
+            <option value='04'>April</option>
+            <option value='05'>May</option>
+            <option value='06'>June</option>
+            <option value='07'>July</option>
+            <option value='08'>August</option>
+            <option value='09'>September</option>
+            <option value='10'>October</option>
+            <option value='11'>November</option>
+            <option value='12'>December</option>
+          </select>
+          <select name='expireYY' id='expireYY'>
+              <option value=''>Year</option>
+              <option value='19'>2019</option>
+              <option value='20'>2020</option>
+              <option value='21'>2021</option>
+              <option value='22'>2022</option>
+              <option value='23'>2023</option>
+              <option value='24'>2024</option>
+          </select>
+        <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
+        <label>CVC</label> <br>
+        <input type="text" required maxlength="3"><br>
+        </div>
+        <div class="hide" id="invoice">
+          <label>Name</label> <br>
+          <input type="text" required><br>
+          <label>Address</label> <br>
+          <input type="text" required><br>
+          <label>Zip code</label> <br>
+          <input type="text" required><br>
+        </div>
+      <!---  <li>
           <select class="paymentOptions" required>
             <option value="Bank Card">Bank Card</option>
             <option value="Klarna">Klarna</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Swish">Swish</option>
           </select>
-        </li>
+        </li> -->
         <li>
           <label>Order detail</label> <br>
           <input type="text">
@@ -88,7 +151,7 @@
         </li>
         <li>
           <label>Date for pick up</label> <br>
-          <input type="date" id="datePicker" required> 
+          <input type="date" id="datePicker" required>
         </li>
         <li>
           <label>Package volume</label> <br>
@@ -144,9 +207,9 @@
       if((monthVar) > 12)
         max = (now.getFullYear()+1) + "-" + (maxMonth) + "-" + (day);
 
-      
+
       $("#datePicker").attr({
-        "value" : today, 
+        "value" : today,
         "max"   : max,
         "min"   : today,
      });
