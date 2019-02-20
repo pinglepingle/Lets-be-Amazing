@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -140,111 +139,127 @@
               <option value='22'>2022</option>
               <option value='23'>2023</option>
               <option value='24'>2024</option>
-          </select>
-        <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
-        <label>CVC</label> <br>
-        <input type="text" required maxlength="3"><br>
-        </div>
-        <div class="hide" id="invoice">
-          <label>Name</label> <br>
-          <input type="text" required><br>
-          <label>Address</label> <br>
-          <input type="text" required><br>
-          <label>Zip code</label> <br>
-          <input type="text" required><br>
-        </div>
-      <!---  <li>
-          <select class="paymentOptions" required>
-            <option value="Bank Card">Bank Card</option>
-            <option value="Klarna">Klarna</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="Swish">Swish</option>
-          </select>
-        </li> -->
-        <li>
-          <label>Order detail</label> <br>
-          <input type="text">
-        </li>
-        <li>
-          <label>Phone number</label> <br>
-          <input type="number" required>
-        </li>
-        <li>
-          <label>Adress for pickup</label> <br>
-          <input type="text" required>
-        </li>
-        <li>
-          <label>Adress for delivery</label> <br>
-          <input type="text" required>
-        </li>
-        <li>
-          <label>Date for pick up</label> <br>
-          <input type="date" id="datePicker" required>
-        </li>
-        <li>
-          <label>Package volume</label> <br>
-          <input type="number" placeholder="Liter" v-model="spaceRequired" >
-        </li>
-        <li>
-          <label>Package weight</label> <br>
-          <input type="number" placeholder="Grams" v-model="totalGrams" >
-        </li>
-        <li>
-          <label>Driver instructions</label> <br>
-          <input type="text" placeholder="Instructions about the package" v-model="driverInstructions">
-        </li>
-        <li>
-          <label>Adress for delivery</label> <br>
-          <input type="text" required>
-        </li>
+            </select>
+            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
+            <label>CVC</label> <br>
+            <input type="text" required maxlength="3"><br>
+          </div>
+          <div class="hide" id="invoice">
+            <label>Name</label> <br>
+            <input type="text" required><br>
+            <label>Address</label> <br>
+            <input type="text" required><br>
+            <label>Zip code</label> <br>
+            <input type="text" required><br>
+          </div>
+          <!---  <li>
+              <select class="paymentOptions" required>
+                <option value="Bank Card">Bank Card</option>
+                <option value="Klarna">Klarna</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Swish">Swish</option>
+              </select>
+          </li> -->
+          <li>
+            <label>Order detail</label> <br>
+            <input type="text">
+          </li>
+          <li>
+            <label>Phone number</label> <br>
+            <input type="number" required>
+          </li>
+          <li>
+            <label>Adress for pickup</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Date for pick up</label> <br>
+            <input type="date" id="datePicker" required>
+          </li>
+          <li>
+            <label>Package volume</label> <br>
+            <input type="number" placeholder="Liter" v-model="spaceRequired" >
+          </li>
+          <li>
+            <label>Package weight</label> <br>
+            <input type="number" placeholder="Grams" v-model="totalGrams" >
+          </li>
+          <li>
+            <label>Driver instructions</label> <br>
+            <input type="text" placeholder="Instructions about the package" v-model="driverInstructions">
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+
+          <li>
+            <input type="submit">
+          </li>
+        </ul>
+      </form>
+      
+      <form id="recieverDetails">
+        <h2>Reciever details</h2>
+        <ul>
+          <li>
+            <label>Reciever name</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Reciever e-mail</label> <br>
+            <input type="email" name="email" required=""><br>
+          </li>
+          <li>
+            <label>Phone number</label> <br>
+            <input type="number" required>
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+        </ul>
+      </form>
+      <button v-on:click="placeOrder">ORDER DELIVERY</button>
+      Your order number is {{ orderId }}
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <script>
+      $(document).ready(function () {
+          // Set restriction on the date
+          var now   = new Date();
+          var day   = ("0" + now.getDate()).slice(-2);
+          var month = ("0" + (now.getMonth() + 1)).slice(-2);
+          var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+          var monthVar = (now.getMonth() + 2);
+          var maxMonth = ("0" + (monthVar%12)).slice(-2);
+          var max   = now.getFullYear() + "-" + (maxMonth) + "-" + (day);
+
+          if((monthVar) > 12)
+              max = (now.getFullYear()+1) + "-" + (maxMonth) + "-" + (day);
 
 
-        <li>
-          <input type="submit">
-        </li>
-      </ul>
+          $("#datePicker").attr({
+              "value" : today,
+              "max"   : max,
+              "min"   : today,
+          });
+      });
 
+    </script>
 
-
-
-    </form>
-    <button v-on:click="placeOrder">ORDER DELIVERY</button>
-    Your order number is {{ orderId }}
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-
-  <script>
-  $(document).ready(function () {
-      // Set restriction on the date
-      var now   = new Date();
-      var day   = ("0" + now.getDate()).slice(-2);
-      var month = ("0" + (now.getMonth() + 1)).slice(-2);
-      var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
-      var monthVar = (now.getMonth() + 2);
-      var maxMonth = ("0" + (monthVar%12)).slice(-2);
-      var max   = now.getFullYear() + "-" + (maxMonth) + "-" + (day);
-
-      if((monthVar) > 12)
-        max = (now.getFullYear()+1) + "-" + (maxMonth) + "-" + (day);
-
-
-      $("#datePicker").attr({
-        "value" : today,
-        "max"   : max,
-        "min"   : today,
-     });
-  });
-
-  </script>
-
-</body>
-
+  </body>
 </html>
