@@ -35,193 +35,240 @@
     <a href="/driver" target="_blank">Driver view</a>
   </div>
   <header id="header">
-    <div id="headerPic" style="background-image: url(https://www.volkswagen-transportbilar.se/content/dam/vw-ngw/vw_nfz/importers/se/kampanjer/caddy-och-transporter-ski-team-2019/16-9/volkswagen-caddy-transporter-skiteam-stage-vinter-16-9.jpg/jcr:content/renditions/original.transform/max/img.jpg);"></div>
+    <!-- https://www.volkswagen-transportbilar.se/content/dam/vw-ngw/vw_nfz/importers/se/kampanjer/caddy-och-transporter-ski-team-2019/16-9/volkswagen-caddy-transporter-skiteam-stage-vinter-16-9.jpg/jcr:content/renditions/original.transform/max/img.jpg -->
+
+    <div id="headerPic" style="background-image: url(https://parabuenosaires.com/wp-content/uploads/2016/10/puerta-puerta.jpg);"></div>
     <h3 id="welcomeText">Welcome to</h3>
     <h1 id="headerText">Amazing Transport</h1>
-    <h2 id="click-here">Click here to send a package</h2>
+  <!--  <h2 id="click-here">Send a package</h2> -->
     <a class="bounce" href="#test">
-    <img class="arrow" src="https://www.freeiconspng.com/uploads/white-down-arrow-png-2.png">
+    <img class="arrow" src="http://www.recognosco.net/assets/images/icon-down-arrow-white.png?fbclid=IwAR0jPQoO0zsK1uQ8a-Ce8HZUQk9HtZGk125oYUo8WoM_mVbED5DV0cfKnE0">
   </a>
   </header>
+<!--url(https://hudwayglass.com/img/fancy/redesign/hwg_evening_go.jpg);-->
+<section>
+  <div id="mapdiv">
+    <div id="test" class="background" style="background-image: url(./img/bgthis.png);"></div>
+    <h1 id="choose"> Send package </h1>
+      <div id="mapborder">
+        <h3 id="maptext"> Select a pick up and drop off position on the map </h3>
+        <div id="my-map"></div><br>
+        <br><br>
+  <!-- https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1151/v1508333403/fileadmin/Skigebiet_Grindelwald-First/Bachalpsee-Winter-Schnee-Wetterhorn-Schreckhorn-Panorama.jpg -->
+      </div>
+  </div>
+  <!--<div class="background" style="background-image: url(https://taxistartup.com/wp-content/themes/taxistartup/images/press/ios_pass_live2.jpg);"></div>
+-->
 
-  <div id="test" class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1151/v1508333403/fileadmin/Skigebiet_Grindelwald-First/Bachalpsee-Winter-Schnee-Wetterhorn-Schreckhorn-Panorama.jpg);"></div>
-  <div class="background" style="background-image: url(https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1359/v1508331713/fileadmin/Skigebiet_Grindelwald-First/Winterwandern-Grindelwald-First-Alpen-Panorama-Nebelmeer.jpg);"></div>
+  <!-- (https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1359/v1508331713/fileadmin/Skigebiet_Grindelwald-First/Winterwandern-Grindelwald-First-Alpen-Panorama-Nebelmeer.jpg -->
 
   <!---<p>Select pickup location first, then your parcel's destination</p>--->
   <div id="page">
-    <h2 id="choose">Click on the map to first choose a pick-up address and then again to choose the delivery address</h2>
-    <div id="my-map"></div><br>
-    <br><br>
 
-    <div class="transbox">
-    </div>
-
-    <div class="transboxsecond">
-    </div>
-
-    <form id="infoPickup">
-      <h2>Pick-up Information</h2>
-      <input type="text" name="field1" placeholder="Your Name *"><br><br>
-      <input type="email" name="field2" placeholder="Your Email *"><br><br>
-      <input type="text" name="field3" placeholder="Your Phonenumber *"><br><br>
-  </form>
-
-    <form id="custumerDetails">
-      <ul>
-        <li>
-          <label>Name</label> <br>
-          <input type="text" required>
-        </li>
-        <li>
-          <label>E-Mail</label> <br>
-          <input type="email" name="email" required=""><br>
-        </li>
-        <li>
-          <label>Express Delivery</label> <br>
-          <input type="checkbox" v-model="express" @change="moveMarker" name="express" value="express">Check this box
-          for
-          express delivery!
-          <br>
-          <br>
-        </li>
-        <div>
-          <h4>Choose your payment method:</h4>
-          <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
-          <label for="swish">Swish</label>
-          <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
-          Credit Card
-          <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
-          Invoice
-        </div>
-        <div class="hide" id="swish">
-          <label>Phone number</label> <br>
-          <input type="text" required>
-        </div>
-        <div class="hide" id="creditCard">
-          <label>Name of card holder</label> <br>
-          <input type="text" required><br>
-          <label>Card number</label> <br>
-          <!---<input type="text" required><br>-->
-          <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
-          -
-          <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
-          -
-          <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
-          -
-          <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
-          <br />
-          <label>Expire date</label> <br>
-          <select name='expireMM' id='expireMM'>
-            <option value=''>Month</option>
-            <option value='01'>January</option>
-            <option value='02'>February</option>
-            <option value='03'>March</option>
-            <option value='04'>April</option>
-            <option value='05'>May</option>
-            <option value='06'>June</option>
-            <option value='07'>July</option>
-            <option value='08'>August</option>
-            <option value='09'>September</option>
-            <option value='10'>October</option>
-            <option value='11'>November</option>
-            <option value='12'>December</option>
-          </select>
-          <select name='expireYY' id='expireYY'>
-              <option value=''>Year</option>
-              <option value='19'>2019</option>
-              <option value='20'>2020</option>
-              <option value='21'>2021</option>
-              <option value='22'>2022</option>
-              <option value='23'>2023</option>
-              <option value='24'>2024</option>
-            </select>
-            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
-            <label>CVC</label> <br>
-            <input type="text" required maxlength="3"><br>
-          </div>
-          <div class="hide" id="invoice">
-            <label>Name</label> <br>
-            <input type="text" required><br>
-            <label>Address</label> <br>
-            <input type="text" required><br>
-            <label>Zip code</label> <br>
-            <input type="text" required><br>
-          </div>
-          <!---  <li>
-              <select class="paymentOptions" required>
-                <option value="Bank Card">Bank Card</option>
-                <option value="Klarna">Klarna</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="Swish">Swish</option>
-              </select>
-          </li> -->
-          <li>
-            <label>Order detail</label> <br>
-            <input type="text">
-          </li>
-          <li>
-            <label>Phone number</label> <br>
-            <input type="number" required>
-          </li>
-          <li>
-            <label>Adress for pickup</label> <br>
-            <input type="text" required>
-          </li>
-          <li>
-            <label>Adress for delivery</label> <br>
-            <input type="text" required>
-          </li>
-          <li>
-            <label>Date for pick up</label> <br>
-            <input type="date" id="datePicker" required>
-          </li>
-          <li>
-            <label>Package volume</label> <br>
-            <input type="number" placeholder="Liter" v-model="spaceRequired" >
-          </li>
-          <li>
-            <label>Package weight</label> <br>
-            <input type="number" placeholder="Grams" v-model="totalGrams" >
-          </li>
-          <li>
-            <label>Driver instructions</label> <br>
-            <input type="text" placeholder="Instructions about the package" v-model="driverInstructions">
-          </li>
-          <li>
-            <label>Adress for delivery</label> <br>
-            <input type="text" required>
-          </li>
-
-          <li>
-            <input type="submit">
-          </li>
-        </ul>
-      </form>
-      
-      <form id="recieverDetails">
-        <h2>Reciever details</h2>
+    <div class="customerBox">
+      <form id="customerDetails">
+        <h3 id="customerHeader"> Your details </h3>
         <ul>
           <li>
-            <label>Reciever name</label> <br>
+            <label>Name</label> <br>
             <input type="text" required>
           </li>
+          <br>
           <li>
-            <label>Reciever e-mail</label> <br>
-            <input type="email" name="email" required=""><br>
+            <label>Address for pick up</label> <br>
+            <input type="text" name="email" required=""><br>
           </li>
+          <br>
           <li>
             <label>Phone number</label> <br>
-            <input type="number" required>
+            <input type="text" name="email" required=""><br>
           </li>
+          <br>
           <li>
-            <label>Adress for delivery</label> <br>
-            <input type="text" required>
+            <label>E-mail</label> <br>
+            <input type="email" name="email" required=""><br>
+          </li>
+          <br>
+          </ul>
+        </form>
+   </div>
+
+    <div class="receiverBox">
+       <form id="receiverDetails">
+        <h3 id="receiverHeader"> Reciever details</h3>
+        <ul>
+          <li>
+            <label>Name</label> <br>
+            <input type="text" required="">
+          </li>
+          <br>
+          <li>
+            <label>Address for drop off</label> <br>
+            <input type="text" name="email" required=""><br>
+          </li>
+          <br>
+          <li>
+            <label>Phone number</label> <br>
+            <input type="text" required="">
+          </li>
+          <br>
+          <li>
+            <label> E-mail</label> <br>
+            <input type="email" required="">
           </li>
         </ul>
       </form>
-      <button v-on:click="placeOrder">ORDER DELIVERY</button>
-      Your order number is {{ orderId }}
     </div>
+</div>
+
+<div id="goToPaymentBox">
+  <input id="expressButton" type="checkbox" v-model="express" @change="moveMarker" name="express" value="express"> </input><h3 id="express">Express Delivery</h3>
+
+  <div id="paymentButton">
+<p id="finish"> Finish your order </p>
+  </div>
+</div>
+
+
+  <button v-on:click="placeOrder">ORDER DELIVERY</button>
+
+    <div>
+      <h4>Choose your payment method:</h4>
+      <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
+      <label for="swish">Swish</label>
+      <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
+      Credit Card
+      <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
+      Invoice
+    </div>
+    <div class="hide" id="swish">
+      <label>Phone number</label> <br>
+      <input type="text" required>
+    </div>
+    <div class="hide" id="creditCard">
+      <label>Name of card holder</label> <br>
+      <input type="text" required><br>
+      <label>Card number</label> <br>
+      <!---<input type="text" required><br>-->
+      <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
+      -
+      <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
+      -
+      <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
+      -
+      <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
+      <br />
+      <label>Expire date</label> <br>
+      <select name='expireMM' id='expireMM'>
+        <option value=''>Month</option>
+        <option value='01'>January</option>
+        <option value='02'>February</option>
+        <option value='03'>March</option>
+        <option value='04'>April</option>
+        <option value='05'>May</option>
+        <option value='06'>June</option>
+        <option value='07'>July</option>
+        <option value='08'>August</option>
+        <option value='09'>September</option>
+        <option value='10'>October</option>
+        <option value='11'>November</option>
+        <option value='12'>December</option>
+      </select>
+      <select name='expireYY' id='expireYY'>
+          <option value=''>Year</option>
+          <option value='19'>2019</option>
+          <option value='20'>2020</option>
+          <option value='21'>2021</option>
+          <option value='22'>2022</option>
+          <option value='23'>2023</option>
+          <option value='24'>2024</option>
+        </select>
+        <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
+        <label>CVC</label> <br>
+        <input type="text" required maxlength="3"><br>
+      </div>
+      <div class="hide" id="invoice">
+        <label>Name</label> <br>
+        <input type="text" required><br>
+        <label>Address</label> <br>
+        <input type="text" required><br>
+        <label>Zip code</label> <br>
+        <input type="text" required><br>
+      </div>
+
+      <li>
+        <label>Order detail</label> <br>
+        <input type="text">
+      </li>
+      <li>
+        <label>Phone number</label> <br>
+        <input type="number" required>
+      </li>
+      <li>
+        <label>Adress for pickup</label> <br>
+        <input type="text" required>
+      </li>
+      <li>
+        <label>Adress for delivery</label> <br>
+        <input type="text" required>
+      </li>
+      <li>
+        <label>Date for pick up</label> <br>
+        <input type="date" id="datePicker" required>
+      </li>
+      <li>
+        <label>Package volume</label> <br>
+        <input type="number" placeholder="Liter" v-model="spaceRequired" >
+      </li>
+      <li>
+        <label>Package weight</label> <br>
+        <input type="number" placeholder="Grams" v-model="totalGrams" >
+      </li>
+      <li>
+        <label>Driver instructions</label> <br>
+        <input type="text" placeholder="Instructions about the package" v-model="driverInstructions">
+      </li>
+      <li>
+        <label>Adress for delivery</label> <br>
+        <input type="text" required>
+      </li>
+
+      <li>
+        <input type="submit">
+      </li>
+   <!--  <form id="infoPickup"> -->
+  <!--     <h2>Sender details</h2> -->
+  <!--     <input type="text" name="field1" placeholder="Your Name *"><br><br> -->
+  <!--     <input type="email" name="field2" placeholder="Your Email *"><br><br> -->
+  <!--     <input type="text" name="field3" placeholder="Your Phonenumber *"><br><br> -->
+  <!-- </form> -->
+
+
+</section>
+      <!-- <form id="recieverDetails"> -->
+      <!--   <h2>Reciever details</h2> -->
+      <!--   <ul> -->
+      <!--     <li> -->
+      <!--       <label>Reciever name</label> <br> -->
+      <!--       <input type="text" required> -->
+      <!--     </li> -->
+      <!--     <li> -->
+      <!--       <label>Reciever e-mail</label> <br> -->
+      <!--       <input type="email" name="email" required=""><br> -->
+      <!--     </li> -->
+      <!--     <li> -->
+      <!--       <label>Phone number</label> <br> -->
+      <!--       <input type="number" required> -->
+      <!--     </li> -->
+      <!--     <li> -->
+      <!--       <label>Adress for delivery</label> <br> -->
+      <!--       <input type="text" required> -->
+      <!--     </li> -->
+      <!--   </ul> -->
+      <!-- </form> -->
+      <!-- <button v-on:click="placeOrder">ORDER DELIVERY</button> -->
+      Your order number is {{ orderId }}
+
     <br>
     <br>
     <br>
