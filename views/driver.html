@@ -19,8 +19,8 @@
 
 <body>
   <div id="page">
-    <a href="/" target="_blank">Open customer view</a> | 
-    <a href="/dispatcher" target="_blank">Open dispatcher view</a> | 
+    <a href="/" target="_blank">Open customer view</a> |
+    <a href="/dispatcher" target="_blank">Open dispatcher view</a> |
     <a href="/driver" target="_blank">Open another driver view</a>
     <h1>
       DELIVERY DRIVER # <input type="textfield" v-model="driverId"/> (enter your ID)
@@ -44,9 +44,9 @@
 
       </div>
     </ul>
-    
+
       <div v-if="driverLocation">Utilized capacity: {{ usedCapacity }}/{{ maxCapacity }}</div>
-    
+
     <button v-on:click="quit">Quit</button>
   </div>
 

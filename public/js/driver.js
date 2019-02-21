@@ -67,7 +67,12 @@ var vm = new Vue({
                 }
             }
         }.bind(this));
-
+        socket.on('orderPickedUp', function (order) {
+            this.$set(this.orders, order.orderId, order);
+        }.bind(this));
+        socket.on('orderUpdated', function (order) {
+            this.$set(this.orders, order.orderId, order);
+        }.bind(this));
         // these icons are not reactive
         this.driverIcon = L.icon({
             iconUrl: "img/driver.png",

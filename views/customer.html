@@ -78,7 +78,7 @@
         </li>
         <li>
           <label>Express Delivery</label> <br>
-          <input type="checkbox" v-model="express" @change="moveMarker" name="express" value="express">Check this box
+          <input type="checkbox" v-model="express" @change="moveMarker(); toggleExpress()" name="express" value="express">Check this box
           for
           express delivery!
           <br>
@@ -191,13 +191,11 @@
             <label>Adress for delivery</label> <br>
             <input type="text" required>
           </li>
-
           <li>
             <input type="submit">
           </li>
         </ul>
       </form>
-      
       <form id="recieverDetails">
         <h2>Reciever details</h2>
         <ul>

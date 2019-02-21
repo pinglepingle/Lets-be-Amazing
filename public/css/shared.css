@@ -155,3 +155,26 @@ ul {
 .hide {
 	display: none;
 }
+
+#orderColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    margin: 0 auto;
+}
+
+#fieldPackages {
+    grid-column: 1 / 1;
+}
+
+#inCar {
+    grid-column: 2 / 2;
+}
+
+#inStorage {
+    grid-column: 3 / 3;
+}
+
+.order {
+    background-color: #ffffff;
+    border-radius: 5px;
+}
