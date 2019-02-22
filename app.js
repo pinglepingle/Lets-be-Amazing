@@ -5,6 +5,7 @@
 // Require express, socket.io, and vue
 var express = require('express');
 var app = express();
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
@@ -43,11 +44,17 @@ function Data() {
     this.drivers = {};
     this.baseLatLong = { "lat": 59.84091407485801, "lng": 17.64924108548685 };
     this.currentOrderNumber = 1000;
+    this.latestDriverId = 0;
 }
 
 Data.prototype.getOrderNumber = function () {
     this.currentOrderNumber += 1;
     return this.currentOrderNumber;
+}
+
+Data.prototype.getDriverId = function () {
+    this.latestDriverId += 1;
+    return this.latestDriverId;
 }
 
 /*
@@ -82,6 +89,7 @@ Data.prototype.getAllOrders = function () {
 
 Data.prototype.addDriver = function (driver) {
     //Store info about the drivers in an "associative array" with driverId as key
+    // TODO: create drivers on server side.
     this.drivers[driver.driverId] = driver;
 };
 
@@ -105,9 +113,11 @@ var data = new Data();
 io.on('connection', function (socket) {
     // Send the current lists of orders and drivers when a client connects
     socket.emit('initialize', { orders: data.getAllOrders(),
-                                drivers: data.getAllDrivers(), base: data.baseLatLong });
+                                drivers: data.getAllDrivers(),
+                                base: data.baseLatLong });
     // Add a listener for when a connected client emits a "placeOrder" message
     socket.on('placeOrder', function (order) {
+        console.log(order);
         var orderId = data.addOrder(order);
         order.orderId = orderId;
         console.log("An order was placed:",order);
@@ -116,12 +126,13 @@ io.on('connection', function (socket) {
         // send the orderId back to the customer who ordered
         socket.emit('orderId', orderId);
     });
-
     socket.on('addDriver', function (driver) {
+        driver.driverId = data.getDriverId();
         data.addDriver(driver);
         console.log("Driver",driver,"is on the job");
         // send updated info to all connected clients, note the use of io instead of socket
         io.emit('driverAdded', driver);
+        socket.emit('driverId', driver.driverId);
     });
     socket.on('updateDriver', function (driver) {
         console.log("Driver", driver.driverId,"was updated");
@@ -149,7 +160,6 @@ io.on('connection', function (socket) {
         console.log("Order",order.orderId,"was picked up");
         data.updateOrderDetails(order);
         io.emit('orderPickedUp', order);
-        console.log(order);
     });
     socket.on('driverAssigned', function(order) {
         // Track assigned driver by adding driverId to the order
@@ -167,6 +177,7 @@ io.on('connection', function (socket) {
             } else {
                 order.orderDetails.status = 2; // It's now in the warehouse
                 order.orderDetails.origin = 1; // It's origin is now in the warehouse
+                order.driverId = null;
                 data.updateOrderDetails(order);
                 console.log(order);
                 io.emit('orderUpdated', order);
@@ -176,6 +187,9 @@ io.on('connection', function (socket) {
             io.emit('orderDroppedOff', orderId);
         }
         // send updated info to all connected clients, note the use of io instead of socket
+    });
+    socket.on('driverIdRequest', function () {
+        io.emit("driverIdSumbit", data.getDriverId());
     });
 });
 

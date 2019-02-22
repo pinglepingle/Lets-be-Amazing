@@ -3,10 +3,6 @@
 /* exported vm */
 'use strict';
 var socket = io();
-
-
-
-
 /*
 
   Data in a order
@@ -39,7 +35,7 @@ var vm = new Vue({
     el: '#page',
     data: {
         map: null,
-        driverId: 1,
+        driverId: null,
         driverLocation: null,
         maxCapacity: 30,
         usedCapacity: 0,
@@ -72,6 +68,9 @@ var vm = new Vue({
         }.bind(this));
         socket.on('orderUpdated', function (order) {
             this.$set(this.orders, order.orderId, order);
+        }.bind(this));
+        socket.on('driverId', function(driverId) {
+            this.driverId = driverId;
         }.bind(this));
         // these icons are not reactive
         this.driverIcon = L.icon({
@@ -111,7 +110,6 @@ var vm = new Vue({
     methods: {
         getDriverInfo: function () {
             return  {
-                driverId: this.driverId,
                 latLong: this.driverLocation.getLatLng(),
                 maxCapacity: this.maxCapacity,
                 usedCapacity: this.usedCapacity
@@ -151,7 +149,7 @@ var vm = new Vue({
             if (Number(this.usedCapacity) + Number(order.orderDetails.spaceRequired) > Number(this.maxCapacity))
                 return;
             else {
-                this.usedCapacity = +order.orderDetails.spaceRequired + +this.usedCapacity;
+                this.usedCapacity = Number(order.orderDetails.spaceRequired) + Number(this.usedCapacity);
                 order.handled = true;
             }
 
@@ -160,15 +158,16 @@ var vm = new Vue({
         },
 
         orderDroppedOff: function (order) {
+            console.log("orderDroppedOff");
             // Update used capacity
-            this.usedCapacity -= order.orderDetails.spaceRequired;
+            this.usedCapacity -= Number(order.orderDetails.spaceRequired);
 
             Vue.delete(this.orders, order.orderId);
             this.map.removeLayer(this.customerMarkers[order.orderId].from);
             this.map.removeLayer(this.customerMarkers[order.orderId].dest);
             this.map.removeLayer(this.customerMarkers[order.orderId].line);
             Vue.delete(this.customerMarkers[order.orderId]);
-            socket.emit("orderDroppedOff", order.orderId);
+            socket.emit('orderDroppedOff', order.orderId);
         },
         // TODO: express and processed need to be separated to properly represent a
         // non-express processed order (i.e. a regular order when going from the distribution

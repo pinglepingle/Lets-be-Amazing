@@ -14,7 +14,7 @@ var vm = new Vue({
         fromMarker: null,
         destMarker: null,
         baseMarker: null,
-        origin: null, // 0 is field, 1 is storage
+        origin: 0, // 0 is field, 1 is storage
         spaceRequired: 0,
         totalGrams: 0,
         driverInstructions: "",
@@ -67,7 +67,7 @@ var vm = new Vue({
         // listen for the results event and add the result to the map
         searchDestControl.on("results", function(data) {
             // Ensure to only add one search to map
-            if(this.destMarker === null) {
+           if(this.destMarker === null) {
                 this.destMarker = L.marker(data.latlng, {draggable: true}).addTo(this.map);
                 this.destMarker.on("drag", this.moveMarker);
                 searchFromControl.addTo(this.map);
@@ -114,9 +114,9 @@ var vm = new Vue({
                     spaceRequired: this.spaceRequired,
                     totalGrams: this.totalGrams,
                     driverInstructions: this.driverInstructions,
-                    origin: 0,
+                    origin: this.origin,
                     status: 0,
-                    express: this.express,
+                    express: this.express
                 }
             });
 
