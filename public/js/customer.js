@@ -5,7 +5,7 @@
 var socket = io();
 
 var vm = new Vue({
-  el: '#page',
+  el: '#main',
   data: {
     express: null,
     orderId: null,

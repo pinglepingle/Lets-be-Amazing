@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/leaflet/leaflet.css">
   <link rel="stylesheet" href="/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
   <link rel="stylesheet" href="css/shared.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="/vue/vue.js"></script>
@@ -27,16 +28,14 @@
     }
 </style>
 
-
 <body>
+  <div id="main">
   <div class="menubar">
     <a href="/" target="_blank">Customer view</a>
     <a href="/dispatcher" target="_blank">Dispatcher view</a>
     <a href="/driver" target="_blank">Driver view</a>
   </div>
   <header id="header">
-    <!-- https://www.volkswagen-transportbilar.se/content/dam/vw-ngw/vw_nfz/importers/se/kampanjer/caddy-och-transporter-ski-team-2019/16-9/volkswagen-caddy-transporter-skiteam-stage-vinter-16-9.jpg/jcr:content/renditions/original.transform/max/img.jpg -->
-
     <div id="headerPic" style="background-image: url(https://parabuenosaires.com/wp-content/uploads/2016/10/puerta-puerta.jpg);"></div>
     <h3 id="welcomeText">Welcome to</h3>
     <h1 id="headerText">Amazing Transport</h1>
@@ -45,7 +44,7 @@
     <img class="arrow" src="http://www.recognosco.net/assets/images/icon-down-arrow-white.png?fbclid=IwAR0jPQoO0zsK1uQ8a-Ce8HZUQk9HtZGk125oYUo8WoM_mVbED5DV0cfKnE0">
   </a>
   </header>
-<!--url(https://hudwayglass.com/img/fancy/redesign/hwg_evening_go.jpg);-->
+
 <section>
   <div id="mapdiv">
     <div id="test" class="background" style="background-image: url(./img/bgthis.png);"></div>
@@ -54,86 +53,65 @@
         <h3 id="maptext"> Select a pick up and drop off position on the map </h3>
         <div id="my-map"></div><br>
         <br><br>
-  <!-- https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1151/v1508333403/fileadmin/Skigebiet_Grindelwald-First/Bachalpsee-Winter-Schnee-Wetterhorn-Schreckhorn-Panorama.jpg -->
       </div>
   </div>
-  <!--<div class="background" style="background-image: url(https://taxistartup.com/wp-content/themes/taxistartup/images/press/ios_pass_live2.jpg);"></div>
--->
 
-  <!-- (https://media.jungfrau.ch/image/upload/f_auto,fl_lossy,q_auto,c_crop,ar_16:9/c_scale,w_1359/v1508331713/fileadmin/Skigebiet_Grindelwald-First/Winterwandern-Grindelwald-First-Alpen-Panorama-Nebelmeer.jpg -->
+  <div id="packageInfo">
+    <form  id="packageDetails">
+      <h3 class="title"> Package information </h3>
+      <label> Pick up address </label> <br>
+      <input type="text" name ="pickupAddr"> <br><br>
+      <label> Drop off address </label> <br>
+      <input type="text" name="dropoffAddr"> <br><br>
+      <label> Weight </label> <br>
+      <input type="number" name="weight"> <br><br>
+      <label> Information for the driver </label> <br>
+      <input type="text" name="infoToDriver"> <br><br>
+      <br> <br>
+      <span><input id="expressButton" type="checkbox" v-model="express" @change="moveMarker" name="express" value="express"> </input><h3 id="express">Express Delivery</h3></span>
+    </form>
+  </div>
 
-  <!---<p>Select pickup location first, then your parcel's destination</p>--->
   <div id="page">
-
     <div class="customerBox">
       <form id="customerDetails">
-        <h3 id="customerHeader"> Your details </h3>
-        <ul>
-          <li>
+        <h3 class="title" id="customerHeader"> Sender's contact info </h3>
             <label>Name</label> <br>
-            <input type="text" required>
-          </li>
-          <br>
-          <li>
-            <label>Address for pick up</label> <br>
-            <input type="text" name="email" required=""><br>
-          </li>
-          <br>
-          <li>
+            <input type="text" required=""><br> <br>
             <label>Phone number</label> <br>
-            <input type="text" name="email" required=""><br>
-          </li>
-          <br>
-          <li>
+            <input type="text" name="email" required=""><br><br>
             <label>E-mail</label> <br>
-            <input type="email" name="email" required=""><br>
-          </li>
+            <input type="email" name="email" required=""><br><br>
           <br>
-          </ul>
         </form>
    </div>
 
     <div class="receiverBox">
-       <form id="receiverDetails">
-        <h3 id="receiverHeader"> Reciever details</h3>
-        <ul>
-          <li>
-            <label>Name</label> <br>
-            <input type="text" required="">
-          </li>
-          <br>
-          <li>
-            <label>Address for drop off</label> <br>
-            <input type="text" name="email" required=""><br>
-          </li>
-          <br>
-          <li>
-            <label>Phone number</label> <br>
-            <input type="text" required="">
-          </li>
-          <br>
-          <li>
-            <label> E-mail</label> <br>
-            <input type="email" required="">
-          </li>
-        </ul>
+      <form id="receiverDetails">
+       <h3 class="title" id="receiverHeader"> Reciever's contact info</h3>
+           <label>Name</label> <br>
+           <input type="text"><br> <br>
+           <label>Phone number</label> <br>
+           <input type="text" ><br>
+         <br>
+           <label> E-mail</label> <br>
+           <input type="email" >
       </form>
     </div>
+
 </div>
 
 <div id="goToPaymentBox">
-  <input id="expressButton" type="checkbox" v-model="express" @change="moveMarker" name="express" value="express"> </input><h3 id="express">Express Delivery</h3>
-
-  <div id="paymentButton">
-<p id="finish"> Finish your order </p>
+  <div id="paymentButton" >
+    <a id="clickPay" href="#paymentPage"> <p id="finish"> Go to payment </p></a>
   </div>
 </div>
 
-
-  <button v-on:click="placeOrder">ORDER DELIVERY</button>
-
+<div id="paymentPage">
+  <div id="paymentBox">
     <div>
-      <h4>Choose your payment method:</h4>
+      <div id="paymentInfo">
+      <h3 class="title">Choose your payment method:</h3>
       <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
       <label for="swish">Swish</label>
       <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
@@ -195,6 +173,18 @@
         <label>Zip code</label> <br>
         <input type="text" required><br>
       </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  <button v-on:click="placeOrder">ORDER DELIVERY</button>
+
+
 
       <li>
         <label>Order detail</label> <br>
@@ -278,30 +268,7 @@
     <br>
     <br>
 
-    <script>
-      $(document).ready(function () {
-          // Set restriction on the date
-          var now   = new Date();
-          var day   = ("0" + now.getDate()).slice(-2);
-          var month = ("0" + (now.getMonth() + 1)).slice(-2);
-          var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
-          var monthVar = (now.getMonth() + 2);
-          var maxMonth = ("0" + (monthVar%12)).slice(-2);
-          var max   = now.getFullYear() + "-" + (maxMonth) + "-" + (day);
-
-          if((monthVar) > 12)
-              max = (now.getFullYear()+1) + "-" + (maxMonth) + "-" + (day);
-
-
-          $("#datePicker").attr({
-              "value" : today,
-              "max"   : max,
-              "min"   : today,
-          });
-      });
-
-    </script>
-
+  </div>
   </body>
 </html>
