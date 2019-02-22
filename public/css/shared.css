@@ -66,6 +66,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	height: 90vh;
+	opacity: 0.9;
 }
 
 #click-here {
@@ -117,7 +118,7 @@ body {
 	height: 500px;
 	width: 400px;
 	position: absolute;
-  top: 198%;
+  top: 196%;
 	left: 15%;
   background-color: #ffffff;
   opacity: 0.8;
@@ -128,7 +129,7 @@ body {
 	height: 500px;
 	width: 400px;
 	position: absolute;
-  top: 198%;
+  top: 196%;
 	right: 15%;
   background-color: #ffffff;
   opacity: 0.7;
@@ -154,4 +155,27 @@ ul {
 
 .hide {
 	display: none;
+}
+
+#orderColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    margin: 0 auto;
+}
+
+#fieldPackages {
+    grid-column: 1 / 1;
+}
+
+#inCar {
+    grid-column: 2 / 2;
+}
+
+#inStorage {
+    grid-column: 3 / 3;
+}
+
+.order {
+    background-color: #ffffff;
+    border-radius: 5px;
 }
