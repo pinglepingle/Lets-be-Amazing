@@ -1,3 +1,5 @@
+
+
 body {
 	margin: 0;
 	padding: 0;
@@ -28,7 +30,7 @@ body {
 	background-position: center center;
 	background-size: cover;
 	background-attachment: fixed;
-	height: 90vh;
+	height: 50vh;
 	/*position: relative;
 	overflow: hidden;
 	width: 100%;*/
@@ -38,9 +40,9 @@ body {
 	position: absolute;
 	text-align: center;
 	width: 100%;
-	top: 23%;
+	top: 16%;
 	left: auto;
-	font-family:'Zefani', 'Didone', sans-serif;
+	font-family:'Roboto', sans-serif;
 	font-size: 30px;
 	color: white;
 	text-shadow: 3px 3px 10px grey;
@@ -51,99 +53,280 @@ body {
 	position: absolute;
 	text-align: center;
 	width: 100%;
-	top: 25%;
+	top: 20%;
 	left: auto;
-	font-family: 'Zefani', 'Didone', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 70px;
 	color: white;
-	text-shadow: 3px 3px 10px grey;
+	text-shadow: 3px 3px 8px grey;
 	text-transform: uppercase;
 }
 
 .background {
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-position: center center;
 	background-size: cover;
-	background-attachment: fixed;
-	height: 90vh;
-	opacity: 0.9;
+	/*background-attachment: fixed;*/
+	height: 500vh;
+	opacity: 80%;
 }
+
+
+/*
+#orderWrapper {
+	margin-top: 100%;
+	display: grid;
+	grid-gap: 20px;
+	background-color: #fff;
+}
+
+.box {
+	border-radius: 15px;
+	background-color: #444;
+	padding: 20px;
+}
+
+.mapB {
+	grid-column: 1 / span 2;
+	grid-row: 1 / span 2;
+}
+
+.senderB {
+	grid-column: 3;
+	grid-row: 1/ span 2;
+}
+
+.receiverB {
+	grid-column: 4;
+	grid-row: 1 /span 2;
+}
+*/
 
 #click-here {
 	position: absolute;
 	text-align: center;
+	font-size: 18px;
 	width: 100%;
-	top: 83%;
+	bottom: 38%;
 	left: auto;
-	font-family: 'Zefani', 'Didone', sans-serif;
-	color: white;
-	text-shadow: 5px 2px 12px black;
+	font-family:'Roboto', sans-serif;
+	color: black;
+	/*text-shadow: 1px 1px 10px black;*/
+	opacity: 10%;
 }
 
 .arrow {
 	position: absolute;
 	z-index: 10;
 	width: 70px;
-	height: 70px;
+	height: 40px;
 	left: 48%;
-	bottom: 2%;
+	top: 50%;
 	animation-name:	bounce;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+  filter: drop-shadow(2px 2px 30px black);
+	opacity: 10%;
 }
 
 #choose {
 	position: absolute;
 	text-align: center;
 	width: 100%;
-	top: 105%;
+	top: 60%;
 	left: auto;
-	font-family: 'Zefani', 'Didone', sans-serif;
-	color: white;
-	text-shadow: 3px 3px 10px black;
+	font-family:'Roboto', sans-serif;
+	color:black;
+	/*text-shadow: 3px 3px 10px black;*/
 }
+.title {
+	font-family:'Roboto', sans-serif;
+	color:black;
 
+}
 #my-map {
 	position: absolute;
-	top: 115%;
+	top: 10%;
 	left: 5%;
 	width: 90%;
 	height: 50vh;
 	border: 1px solid rgba(0,0,0,0.4);
-	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+	/*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);*/
 	margin: 1em auto;
+  filter: opacity(100%);
+	z-index: 5;
 }
 
-.transbox {
-	height: 500px;
-	width: 400px;
+input[type="checkbox"]{
+cursor: pointer;
+width: 20px;
+height: 20px;
+}
+
+#expressButton {
+	margin-top: 2%;
+	margin-left: 0%;
+	/*display: inline-flex;*/
+}
+
+#express {
+	font-size: 16px;
+	font-family:'Roboto', sans-serif;
+	font-weight: bold;
+	display: inline-block;
+}
+
+#mapborder {
+	height: 65vh;
+	width: 35%;
 	position: absolute;
-  top: 196%;
-	left: 15%;
+  top: 70%;
+	left: 5%;
+  background-color: White;
+  opacity: 0.8;
+  filter: alpha(opacity=60);
+}
+
+#maptext {
+	font-family:'Roboto', sans-serif;
+	/*font-size: 18px;
+	color: #636363;*/
+	text-align: center;
+}
+
+#page {
+	top: 70%;
+	left: 59%;
+	position: absolute;
+}
+
+#packageInfo {
+	position: absolute;
+	height: 65vh;
+	width: 210px;
+	top: 70%;
+	left: 41.5%;
+	background-color: #ffffff;
+  opacity: 0.8;
+	/*margin-left: 77%;*/
+	font-family:'Roboto', sans-serif;
+	color:black;
+}
+
+.customerBox {
+	height: 42vh;
+	width: 220px;
+	position: absolute;
+  top: 70%;
+	left: 60%;
   background-color: #ffffff;
   opacity: 0.8;
   filter: alpha(opacity=60);
 }
 
-.transboxsecond {
-	height: 500px;
-	width: 400px;
+.receiverBox {
+	height: 42vh;
+	width: 220px;
 	position: absolute;
-  top: 196%;
-	right: 15%;
+  top: 70%;
+	margin-left: 250px;
   background-color: #ffffff;
-  opacity: 0.7;
+  opacity: 0.8;
   filter: alpha(opacity=60);
 }
 
-#infoPickup {
-	position: absolute;
-	top: 200%;
-	left: 20%;
-	font-family: 'Zefani', 'Didone', sans-serif;
-	color: white;
-	text-shadow: 5px 2px 7px black;
+#clickPay {
+color: black;
+text-decoration: none;
 }
+#clickPay :hover{
+color: black;
+text-decoration: none;
+}
+
+#packageDetails {
+	margin-left: 10px;
+}
+
+#goToPaymentBox{
+	height: 20vh;
+	width: 475px;
+	position: absolute;
+	top: 115%;
+	left: 59%;
+	background-color: white;
+	opacity: 0.8;
+}
+
+#paymentButton {
+	height: 45px;
+	width: 300px;
+	margin-left: 20%;
+	margin-top: 10%;
+	position: absolute;
+	background-color: lightgreen;
+	border-radius: 25px;
+}
+
+#finish {
+	font-size: 20px;
+	font-family:'Roboto', sans-serif;
+	margin-left: 29%;
+	margin-top: 3.5%;
+}
+
+#paymentPage {
+	top: 140%;
+	position: absolute;
+	width: 89.2%;
+	left: 5%;
+
+}
+
+#paymentBox {
+	margin-top: 45px;
+	position: absolute;
+	height: 42vh;
+	width: 100%;
+	/*left: 5%;*/
+	background-color: #ffffff;
+	opacity: 0.8;
+}
+
+#paymentInfo {
+	margin-left: 5%;
+	margin-top: 2%;
+}
+/* #infoPickup { */
+/* 	position: absolute; */
+/* 	top: 200%; */
+/* 	left: 20%; */
+/* 	font-family: 'Zefani', 'Didone', sans-serif; */
+/* 	color: white; */
+/* 	text-shadow: 5px 2px 7px black; */
+/* } */
+#customerDetails {
+	position: absolute;
+	/*top: 200%;*/
+	left: 5%;
+	font-family:'Roboto', sans-serif;
+	color: black;
+	/*text-shadow: 5px 2px 7px gray;*/
+}
+
+#receiverDetails {
+	position: absolute;
+	/*top: 3%;*/
+	left: 5%;
+	font-family:'Roboto', sans-serif;
+	color: black;
+	/*text-shadow: 5px 2px 7px gray;*/
+}
+
+
+
+
+
 
 .popup-list {
 	padding-left: 0;
