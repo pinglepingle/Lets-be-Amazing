@@ -230,7 +230,6 @@ height: 20px;
 	position: absolute;
   top: 70%;
 	margin-left: 250px;
-	/*left: 76%;*/
   background-color: #ffffff;
   opacity: 0.8;
   filter: alpha(opacity=60);
@@ -339,4 +338,27 @@ ul {
 
 .hide {
 	display: none;
+}
+
+#orderColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    margin: 0 auto;
+}
+
+#fieldPackages {
+    grid-column: 1 / 1;
+}
+
+#inCar {
+    grid-column: 2 / 2;
+}
+
+#inStorage {
+    grid-column: 3 / 3;
+}
+
+.order {
+    background-color: #ffffff;
+    border-radius: 5px;
 }

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/shared.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
   <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  src="js/jquery.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="/vue/vue.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/leaflet/leaflet.js"></script>
@@ -44,6 +44,7 @@
     <img class="arrow" src="http://www.recognosco.net/assets/images/icon-down-arrow-white.png?fbclid=IwAR0jPQoO0zsK1uQ8a-Ce8HZUQk9HtZGk125oYUo8WoM_mVbED5DV0cfKnE0">
   </a>
   </header>
+
 
 <section>
   <div id="mapdiv">
@@ -178,10 +179,6 @@
   </div>
 </div>
 
-
-
-
-
   <button v-on:click="placeOrder">ORDER DELIVERY</button>
 
 
@@ -257,6 +254,163 @@
       <!--   </ul> -->
       <!-- </form> -->
       <!-- <button v-on:click="placeOrder">ORDER DELIVERY</button> -->
+<!--
+    <form id="infoForm">
+      <div id="infoPickup">
+        <h2>Pick-up Information</h2>
+        <input type="text" name="field1" placeholder="Your Name *"><br><br>
+        <input type="email" name="field2" placeholder="Your Email *"><br><br>
+        <input type="text" name="field3" placeholder="Your Phonenumber *"><br><br>
+      </div>
+      <div id="infoDropoff">
+      </div>
+  </form>
+
+    <form id="custumerDetails">
+      <ul>
+        <li>
+          <label>Name</label> <br>
+          <input type="text" required>
+        </li>
+        <li>
+          <label>E-Mail</label> <br>
+          <input type="email" name="email" required=""><br>
+        </li>
+        <li>
+          <label>Express Delivery</label> <br>
+          <input type="checkbox" v-model="express" @change="moveMarker(); toggleExpress()" name="express" value="express">Check this box
+          for
+          express delivery!
+          <br>
+          <br>
+        </li>
+        <div>
+          <h4>Choose your payment method:</h4>
+          <input type="radio" name="payment" value="Swish" v-on:click="swish();"/>
+          <label for="swish">Swish</label>
+          <input type="radio" name="payment" value="Credit Card" v-on:click="creditCard();"/>
+          Credit Card
+          <input type="radio" name="payment" value="Invoice" v-on:click="invoice();"/>
+          Invoice
+        </div>
+        <div class="hide" id="swish">
+          <label>Phone number</label> <br>
+          <input type="text" required>
+        </div>
+        <div class="hide" id="creditCard">
+          <label>Name of card holder</label> <br>
+          <input type="text" required><br>
+          <label>Card number</label> <br>
+         
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard1" id="creditCard1" pattern="\d" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard2" id="creditCard2" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard3" id="creditCard3" maxlength="4"/>
+          -
+          <input class="inputCard" type="text" style="width: 30px;" name="creditCard4" id="creditCard4" maxlength="4"/>
+          <br />
+          <label>Expire date</label> <br>
+          <select name='expireMM' id='expireMM'>
+            <option value=''>Month</option>
+            <option value='01'>January</option>
+            <option value='02'>February</option>
+            <option value='03'>March</option>
+            <option value='04'>April</option>
+            <option value='05'>May</option>
+            <option value='06'>June</option>
+            <option value='07'>July</option>
+            <option value='08'>August</option>
+            <option value='09'>September</option>
+            <option value='10'>October</option>
+            <option value='11'>November</option>
+            <option value='12'>December</option>
+          </select>
+          <select name='expireYY' id='expireYY'>
+              <option value=''>Year</option>
+              <option value='19'>2019</option>
+              <option value='20'>2020</option>
+              <option value='21'>2021</option>
+              <option value='22'>2022</option>
+              <option value='23'>2023</option>
+              <option value='24'>2024</option>
+            </select>
+            <input class="inputCard" type="hidden" name="expiry" id="expiry" maxlength="4"/><br>
+            <label>CVC</label> <br>
+            <input type="text" required maxlength="3"><br>
+          </div>
+          <div class="hide" id="invoice">
+            <label>Name</label> <br>
+            <input type="text" required><br>
+            <label>Address</label> <br>
+            <input type="text" required><br>
+            <label>Zip code</label> <br>
+            <input type="text" required><br>
+        </div>
+          <li>
+            <label>Order detail</label> <br>
+            <input type="text">
+          </li>
+          <li>
+            <label>Phone number</label> <br>
+            <input type="number" required>
+          </li>
+          <li>
+            <label>Adress for pickup</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Date for pick up</label> <br>
+            <input type="date" id="datePicker" required>
+          </li>
+          <li>
+            <label>Package volume</label> <br>
+            <input type="number" placeholder="Liter" v-model="spaceRequired" >
+          </li>
+          <li>
+            <label>Package weight</label> <br>
+            <input type="number" placeholder="Grams" v-model="totalGrams" >
+          </li>
+          <li>
+            <label>Driver instructions</label> <br>
+            <input type="text" placeholder="Instructions about the package" v-model="driverInstructions">
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <input type="submit">
+          </li>
+        </ul>
+      </form>
+      <form id="recieverDetails">
+        <h2>Reciever details</h2>
+        <ul>
+          <li>
+            <label>Reciever name</label> <br>
+            <input type="text" required>
+          </li>
+          <li>
+            <label>Reciever e-mail</label> <br>
+            <input type="email" name="email" required=""><br>
+          </li>
+          <li>
+            <label>Phone number</label> <br>
+            <input type="number" required>
+          </li>
+          <li>
+            <label>Adress for delivery</label> <br>
+            <input type="text" required>
+          </li>
+        </ul>
+      </form>
+      <button v-on:click="placeOrder">ORDER DELIVERY</button>
+-->
       Your order number is {{ orderId }}
 
     <br>
