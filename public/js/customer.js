@@ -12,19 +12,9 @@ var vm = new Vue({
         destMarker: null,
         baseMarker: null,
         origin: 0, // 0 is field, 1 is storage
-        // Fields from the form:
-        addressPickup: null,
-        addressDropOff: null, 
         spaceRequired: 0,
         totalGrams: 0,
         driverInstructions: "",
-        senderName: "",
-        senderPhone: "",
-        senderMail: "",
-        receverName: "",
-        receverPhone: "",
-        receverMail: "",
-        paymentField: null,
         driverMarkers: {}
     },
     created: function () {
@@ -111,7 +101,6 @@ var vm = new Vue({
     },
     methods: {
         placeOrder: function() {
-            
             socket.emit("placeOrder", {
                 fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
                 destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
@@ -167,22 +156,6 @@ var vm = new Vue({
             }
 
             this.express == true;
-        },
-        checkValidForm: function () {
-            /*
-            if(addressPickup == null)
-            addressDropOff: null, 
-            spaceRequired: 0,
-            totalGrams: 0,
-            driverInstructions: "",
-            senderName: "",
-            senderPhone: "",
-            senderMail: "",
-            receverName: "",
-            receverPhone: "",
-            receverMail: "",
-            paymentField: null,
-            */
         },
         swish: function(event) {
             document.getElementById('swish').style.display ='block';
