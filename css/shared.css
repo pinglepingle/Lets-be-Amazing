@@ -1,0 +1,181 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.menubar {
+	background-color: #333;
+	overflow: hidden;
+}
+
+.menubar a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+	font-family:'Zefani', 'Didone', sans-serif;
+}
+
+.menubar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#headerPic {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 98vh;
+	/*position: relative;
+	overflow: hidden;
+	width: 100%;*/
+}
+
+#welcomeText {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 23%;
+	left: auto;
+	font-family:'Zefani', 'Didone', sans-serif;
+	font-size: 30px;
+	color: white;
+	text-shadow: 3px 3px 10px grey;
+	text-transform: uppercase;
+}
+
+#headerText {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 25%;
+	left: auto;
+	font-family: 'Zefani', 'Didone', sans-serif;
+	font-size: 70px;
+	color: white;
+	text-shadow: 3px 3px 10px grey;
+	text-transform: uppercase;
+}
+
+.background {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 125vh;
+	opacity: 0.9;
+}
+
+#click-here {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 83%;
+	left: auto;
+	font-family: 'Zefani', 'Didone', sans-serif;
+	color: white;
+	text-shadow: 5px 2px 12px black;
+}
+
+.arrow {
+	position: absolute;
+	z-index: 10;
+	width: 100px;
+	height: 50px;
+	left: 48%;
+	bottom: 2%;
+	animation-name:	bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+#choose {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 105%;
+	left: auto;
+	font-family: 'Zefani', 'Didone', sans-serif;
+	color: white;
+	text-shadow: 3px 3px 10px black;
+}
+
+#my-map {
+	position: absolute;
+	top: 115%;
+	left: 5%;
+	width: 90%;
+	height: 50vh;
+	border: 1px solid rgba(0,0,0,0.4);
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+	margin: 1em auto;
+}
+
+.transbox {
+	height: 500px;
+	width: 400px;
+	position: absolute;
+  top: 196%;
+	left: 15%;
+  background-color: #ffffff;
+  opacity: 0.8;
+  filter: alpha(opacity=60);
+}
+
+.transboxsecond {
+	height: 500px;
+	width: 400px;
+	position: absolute;
+  top: 196%;
+	right: 15%;
+  background-color: #ffffff;
+  opacity: 0.7;
+  filter: alpha(opacity=60);
+}
+
+#infoPickup {
+	position: absolute;
+	top: 200%;
+	left: 20%;
+	font-family: 'Zefani', 'Didone', sans-serif;
+	color: white;
+	text-shadow: 5px 2px 7px black;
+}
+
+.popup-list {
+	padding-left: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+.hide {
+	display: none;
+}
+
+#orderColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    margin: 0 auto;
+}
+
+#fieldPackages {
+    grid-column: 1 / 1;
+}
+
+#inCar {
+    grid-column: 2 / 2;
+}
+
+#inStorage {
+    grid-column: 3 / 3;
+}
+
+.order {
+    background-color: #ffffff;
+    border-radius: 5px;
+}
