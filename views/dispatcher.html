@@ -1,47 +1,90 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DELI-VERY DISPATCHER</title>
-  <link rel="stylesheet" href="css/deli-very.css">
-  <script src="/vue/vue.js" defer></script>
-  <script src="/socket.io/socket.io.js" defer></script>
-  <script src="js/dispatcher.js" defer></script>
-</head>
-
-<body>
-  <div id="orders">
-    <div id="orderList">
-      <div v-for="(order, key) in orders">
-        <div style="padding-top: 5px;">
-          <hr >
-        </div>
-
-          <div>
-              <span style="color: rgb(72, 72, 72);"># {{order.orderId}} -  
-              <span v-for="burgers in order.burgerChosen" style="font-weight: bold;">
-                {{burgers}} - 
-              </span>
-            </span>
-            
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DELIVERY DISPATCHER</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css">
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/dispatcher.css">
+    <script src="/vue/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/leaflet/leaflet.js"></script>
+    <script src="js/dispatcher.js" defer></script>
+  </head>
+  <body>
+    <div class="menubar">
+      <a href="/" target="_blank">Customer view</a> |
+      <a href="/dispatcher" target="_blank">Dispatcher view</a> |
+      <a href="/driver" target="_blank">Driver view</a>
+    </div>
+    <h1 style="justify-content: center; display: flex;">
+      DELIVERY DISPATCHER
+    </h1>
+    <div id="page">
+      <div id="my-map"></div>
+      <h1 style="justify-content: center; display: flex;">Orders</h1>
+      <div id="orderColumns">
+        <div id="field">Packages to pick up</div>
+        <div id="fieldPackages">
+          <div v-for="order in orders">
+            <div v-if="order.orderDetails.status === 0" class="order">
+              <div>
+                ID: {{ order.orderId}}<br>
+                From: {{ order.senderAddress }}<br>
+                Destination: {{ order.recieverAddress }}<br>
+                Express: {{ order.express ? "Yes" : "No" }}<br><br>
+                Assign a driver:
+                <select v-on:change="assignDriver(order)" v-model="order.driverId">
+                  <option disabled value="">Assign a driver</option>
+                  <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
+                </select>
+                <br>
+                <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+              </div>
+            </div>
+            <br>
           </div>
-          
-          <span class="regular" style="font-style: italic; text-transform: capitalize; font-weight: lighter; font-size: 18px;"> {{ order.custumerInfo.name }}, </span>
-          <span class="regular"> {{ order.custumerInfo.email }}, </span>
-          <span> ( {{ order.custumerInfo.payment }}, </span>
-          <span> {{ order.custumerInfo.gender }} ) </span>
-
+        </div>
+        <div class="boxshadow"></div>
+        <div id="car">Packages on the move</div>
+        <div id="inCar">
+          <div v-for="order in orders">
+            <div v-if="order.orderDetails.status === 1" class="order">
+              #{{ order.orderId}}
+              From: {{ order.senderAddress }}
+              Destination: {{ order.recieverAddress }}
+              Express: {{ order.express ? "Yes" : "No" }}
+              <select v-on:change="assignDriver(order)" v-model="order.driverId">
+                <option disabled value="">Assign a driver</option>
+                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
+              </select>
+              <br>
+              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="boxshadow" style="grid-column: 2;"></div>
+        <div id="storage">Packages in storage</div>
+        <div id="inStorage">
+          <div v-for="order in orders">
+            <div v-if="order.orderDetails.status === 2" class="order">
+              #{{ order.orderId}}
+              From: {{ order.senderAddress }}
+              Destination: {{ order.recieverAddress }}
+              Express: {{ order.express ? "Yes" : "No" }}
+              <select v-on:change="assignDriver(order)" v-model="order.driverId">
+                <option disabled value="">Assign a driver</option>
+                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
+              </select>
+              <br>
+              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="boxshadow" style="grid-column: 3;"></div>
       </div>
     </div>
-
-    <div id="dots">
-      <div v-for="(order, key) in orders" v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
-        {{ key }}
-      </div>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
