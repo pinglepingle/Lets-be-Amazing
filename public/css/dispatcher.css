@@ -1,0 +1,110 @@
+body {
+    background-color: #E8F4F8;
+    font-family: Roboto, sans-serif;
+}
+
+#orderColumns {
+    display: grid;
+    grid-template-columns: repeat(3, 30vw);
+    grid-template-rows: 10vh 75vh;
+    width: 93%;
+    margin: 0 auto;
+    grid-column-gap: 1%;
+}
+
+#orderColumns > #field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    grid-row: 1;
+    background-color: ;
+    font-size: 200%;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#orderColumns > #car {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2;
+    grid-row: 1;
+    background-color: ;
+    font-size: 200%;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#orderColumns > #storage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 3;
+    grid-row: 1;
+    background-color: ;
+    font-size: 200%;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#fieldPackages {
+    grid-column: 1 / 1;
+    grid-row: 2 / 2;
+    overflow: hidden;
+    background-color: #8aacb8;
+    scrollbar-width: none;
+    padding-top: 5%;
+}
+
+#fieldPackages:hover {
+    overflow-y: auto;
+}
+
+#inCar {
+    grid-column: 2 / 2;
+    grid-row: 2 / 2;
+    overflow: hidden;
+    background-color: #8a96b8;
+    scrollbar-width: none;
+}
+
+#inCar:hover {
+    overflow-y: auto;
+}
+
+#inStorage {
+    grid-column: 3 / 3;
+    grid-row: 2 / 2;
+    overflow: hidden;
+    background-color: #8ab8ac;
+    scrollbar-width: none;
+}
+
+#inStorage:hover {
+    overflow-y: auto;
+}
+
+.order {
+    background-color: #fefefe;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.order > div {
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}
+
+.boxshadow {
+grid-column: 1;
+grid-row: 2;
+box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.2) inset;
+z-index: 1;
+pointer-events: none;
+}
