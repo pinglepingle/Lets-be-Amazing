@@ -15,6 +15,18 @@ var vm = new Vue({
         spaceRequired: 0,
         totalGrams: 0,
         driverInstructions: "",
+        senderName: "",
+        senderNumber: "",
+        senderEmail: "",
+        senderAddress:"",
+        receverName:"",
+        receverNumber:"",
+        receverEmail:"",
+        receverAddress:"",
+        ccname:"",
+        ccnumber:"",
+        ccexpiration:"",
+        cccvv:"",
         driverMarkers: {}
     },
     created: function () {
@@ -101,21 +113,26 @@ var vm = new Vue({
     },
     methods: {
         placeOrder: function() {
-            socket.emit("placeOrder", {
-                fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
-                destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
-                expressOrAlreadyProcessed: this.express ? true : false,
-                handled: false,
-                orderDetails: {
-                    pieces: 1,
-                    spaceRequired: this.spaceRequired,
-                    totalGrams: this.totalGrams,
-                    driverInstructions: this.driverInstructions,
-                    origin: this.origin,
-                    status: 0,
-                    express: this.express
-                }
-            });
+
+            if(this.senderName !== "" ) {
+                socket.emit("placeOrder", {
+                    fromLatLong: [this.fromMarker.getLatLng().lat, this.fromMarker.getLatLng().lng],
+                    destLatLong: [this.destMarker.getLatLng().lat, this.destMarker.getLatLng().lng],
+                    expressOrAlreadyProcessed: this.express ? true : false,
+                    handled: false,
+                    orderDetails: {
+                        pieces: 1,
+                        spaceRequired: this.spaceRequired,
+                        totalGrams: this.totalGrams,
+                        driverInstructions: this.driverInstructions,
+                        origin: this.origin,
+                        status: 0,
+                        express: this.express
+                    }
+                });
+            }
+
+           
 
         },
         getPolylinePoints: function() {
