@@ -15,7 +15,7 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-	font-family:'Zefani', 'Didone', sans-serif;
+  font-family:'Zefani', 'Didone', sans-serif;
 }
 
 .menubar a:hover {
@@ -155,27 +155,4 @@ ul {
 
 .hide {
 	display: none;
-}
-
-#orderColumns {
-    display: grid;
-    grid-template-columns: repeat(3, 30%);
-    margin: 0 auto;
-}
-
-#fieldPackages {
-    grid-column: 1 / 1;
-}
-
-#inCar {
-    grid-column: 2 / 2;
-}
-
-#inStorage {
-    grid-column: 3 / 3;
-}
-
-.order {
-    background-color: #ffffff;
-    border-radius: 5px;
 }
