@@ -51,47 +51,35 @@ body {
 #fieldPackages {
     grid-column: 1 / 1;
     grid-row: 2 / 2;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #8aacb8;
-    scrollbar-width: none;
     padding-top: 5%;
-}
-
-#fieldPackages:hover {
-    overflow-y: auto;
 }
 
 #inCar {
     grid-column: 2 / 2;
     grid-row: 2 / 2;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #8a96b8;
-    scrollbar-width: none;
-}
-
-#inCar:hover {
-    overflow-y: auto;
+    padding-top: 5%;
 }
 
 #inStorage {
     grid-column: 3 / 3;
     grid-row: 2 / 2;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #8ab8ac;
-    scrollbar-width: none;
-}
-
-#inStorage:hover {
-    overflow-y: auto;
+    padding-top: 5%;
 }
 
 .order {
-    background-color: #fefefe;
+    background-color: #eee;
     width: 90%;
     height: auto;
     margin: 0 auto;
-    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-style: solid;
+    border-color: #ddd;
+    border-width: 2px;
 }
 
 .order > div {

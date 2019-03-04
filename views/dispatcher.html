@@ -18,12 +18,8 @@
       <a href="/dispatcher" target="_blank">Dispatcher view</a> |
       <a href="/driver" target="_blank">Driver view</a>
     </div>
-    <h1 style="justify-content: center; display: flex;">
-      DELIVERY DISPATCHER
-    </h1>
     <div id="page">
       <div id="my-map"></div>
-      <h1 style="justify-content: center; display: flex;">Orders</h1>
       <div id="orderColumns">
         <div id="field">Packages to pick up</div>
         <div id="fieldPackages">
@@ -41,9 +37,9 @@
                 </select>
                 <br>
                 <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+                <span v-else><br><br></span>
               </div>
             </div>
-            <br>
           </div>
         </div>
         <div class="boxshadow"></div>
@@ -51,16 +47,20 @@
         <div id="inCar">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 1" class="order">
-              #{{ order.orderId}}
-              From: {{ order.senderAddress }}
-              Destination: {{ order.recieverAddress }}
-              Express: {{ order.express ? "Yes" : "No" }}
-              <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                <option disabled value="">Assign a driver</option>
-                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-              </select>
-              <br>
-              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
+              <div>
+                ID: {{ order.orderId}}<br>
+                From: {{ order.senderAddress }}<br>
+                Destination: {{ order.recieverAddress }}<br>
+                Express: {{ order.express ? "Yes" : "No" }}<br><br>
+                Assign a driver:
+                <select v-on:change="assignDriver(order)" v-model="order.driverId">
+                  <option disabled value="">Assign a driver</option>
+                  <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
+                </select>
+                <br>
+                <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+                <span v-else><br><br></span>
+              </div>
             </div>
           </div>
         </div>
@@ -69,18 +69,21 @@
         <div id="inStorage">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 2" class="order">
-              #{{ order.orderId}}
-              From: {{ order.senderAddress }}
-              Destination: {{ order.recieverAddress }}
-              Express: {{ order.express ? "Yes" : "No" }}
-              <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                <option disabled value="">Assign a driver</option>
-                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-              </select>
-              <br>
-              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
+              <div>
+                ID: {{ order.orderId}}<br>
+                From: {{ order.senderAddress }}<br>
+                Destination: {{ order.recieverAddress }}<br>
+                Express: {{ order.express ? "Yes" : "No" }}<br><br>
+                Assign a driver:
+                <select v-on:change="assignDriver(order)" v-model="order.driverId">
+                  <option disabled value="">Assign a driver</option>
+                  <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
+                </select>
+                <br>
+                <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+                <span v-else><br><br></span>
+              </div>
             </div>
-            <br>
           </div>
         </div>
         <div class="boxshadow" style="grid-column: 3;"></div>
