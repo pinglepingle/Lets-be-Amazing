@@ -30,7 +30,6 @@ var socket = io();
 
 */
 
-
 var vm = new Vue({
     el: '#page',
     data: {
