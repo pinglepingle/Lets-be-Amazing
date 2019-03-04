@@ -52,11 +52,6 @@
                 From: {{ order.senderAddress }}<br>
                 Destination: {{ order.recieverAddress }}<br>
                 Express: {{ order.express ? "Yes" : "No" }}<br><br>
-                Assign a driver:
-                <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                  <option disabled value="">Assign a driver</option>
-                  <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-                </select>
                 <br>
                 <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
                 <span v-else><br><br></span>
