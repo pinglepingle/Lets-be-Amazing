@@ -186,6 +186,16 @@ var vm = new Vue({
             var connectMarkers = L.polyline(this.getPolylinePoints(order), {color: 'blue'}).addTo(this.map);
             return {from: fromMarker, dest: destMarker, line: connectMarkers};
         },
+        togglePackageInfo: function (click) {
+            var clickedOrder = click.target;
+            clickedOrder.classList.toggle("active");
+            var content = clickedOrder.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
     },
     computed: {
         computeVisibility: function (event) {
