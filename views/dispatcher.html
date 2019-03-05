@@ -13,77 +13,59 @@
     <script src="js/dispatcher.js" defer></script>
   </head>
   <body>
-    <div class="menubar">
-      <a href="/" target="_blank">Customer view</a> |
-      <a href="/dispatcher" target="_blank">Dispatcher view</a> |
-      <a href="/driver" target="_blank">Driver view</a>
-    </div>
-    <h1 style="justify-content: center; display: flex;">
-      DELIVERY DISPATCHER
-    </h1>
     <div id="page">
-      <div id="my-map"></div>
-      <h1 style="justify-content: center; display: flex;">Orders</h1>
       <div id="orderColumns">
+        <div id="my-map"></div>
         <div id="field">Packages to pick up</div>
         <div id="fieldPackages">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 0" class="order">
-              <div>
-                ID: {{ order.orderId}}<br>
-                From: {{ order.senderAddress }}<br>
-                Destination: {{ order.recieverAddress }}<br>
-                Express: {{ order.express ? "Yes" : "No" }}<br><br>
-                Assign a driver:
-                <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                  <option disabled value="">Assign a driver</option>
-                  <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-                </select>
-                <br>
-                <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
-              </div>
+              <span style="grid-column: 1 / 1;">{{ order.orderId}}<br></span>
+              <span style="grid-column: 2 / 2;">{{ order.senderAddress }}<br></span>
+              <span style="grid-column: 3 / 3;">{{ order.recieverAddress }}<br></span>
+              <span style="grid-column: 4 / 4;"><b>{{ order.express ? "Express" : "" }}</b><br><br></span>
+              <br>
+              <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+              <span v-else><br><br></span>
             </div>
-            <br>
           </div>
         </div>
         <div class="boxshadow"></div>
-        <div id="car">Packages on the move</div>
-        <div id="inCar">
-          <div v-for="order in orders">
-            <div v-if="order.orderDetails.status === 1" class="order">
-              #{{ order.orderId}}
-              From: {{ order.senderAddress }}
-              Destination: {{ order.recieverAddress }}
-              Express: {{ order.express ? "Yes" : "No" }}
-              <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                <option disabled value="">Assign a driver</option>
-                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-              </select>
-              <br>
-              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="boxshadow" style="grid-column: 2;"></div>
         <div id="storage">Packages in storage</div>
         <div id="inStorage">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 2" class="order">
-              #{{ order.orderId}}
-              From: {{ order.senderAddress }}
-              Destination: {{ order.recieverAddress }}
-              Express: {{ order.express ? "Yes" : "No" }}
-              <select v-on:change="assignDriver(order)" v-model="order.driverId">
-                <option disabled value="">Assign a driver</option>
-                <option v-for="driver in drivers" :value="driver.driverId">Driver nr. {{ driver.driverId }}. Capacity: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}</option>
-              </select>
+              <span style="grid-column: 1 / 1;">{{ order.orderId}}<br></span>
+              <span style="grid-column: 2 / 2;">{{ order.senderAddress }}<br></span>
+              <span style="grid-column: 3 / 3;">{{ order.recieverAddress }}<br></span>
+              <span style="grid-column: 4 / 4;"><b>{{ order.express ? "Yes" : "No" }}</b><br><br></span>
               <br>
-              <span v-if="order.driverId">Assigned to driver #{{ order.driverId }}</span>
+              <span v-if="order.driverId"><br>Assigned to driver #{{ order.driverId }}<br></span>
+              <span v-else><br><br></span>
             </div>
-            <br>
           </div>
         </div>
-        <div class="boxshadow" style="grid-column: 3;"></div>
+        <div class="boxshadow2" style="grid-column: 2; grid-row: 2"></div>
+        <div id="driver0">Available drivers</div>
+        <div id="cars0">
+          <div v-for="driver in drivers" class="driv">
+            <div>
+              {{ driver.driverId }}: {{ driver.usedCapacity }}/{{ driver.maxCapacity }}
+            </div>
+          </div>
+        </div>
+        <button class="confirmcar">Confirm</button>
+        <div class="boxshadow2" style="grid-column: 2; grid-row: 4"></div>
+        <div id="driver1">Available drivers</div>
+        <div id="cars1">
+          <div v-for="driver in drivers" class="driv">
+            <div>
+              {{ driver.usedCapacity }}/{{ driver.maxCapacity }}
+            </div>
+          </div>
+        </div>
+        <div class="boxshadow" style="grid-column: 1; grid-row: 4;"></div>
+        <button class="confirmcar" style="grid-row: 4">Confirm</button>
       </div>
     </div>
   </body>
