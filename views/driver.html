@@ -25,12 +25,13 @@
     <a href="/driver" target="_blank">Driver view</a>
   </div>
 
+
   <div id="page">
     <h1 id="driverid">
       DELIVERY DRIVER #{{ driverId }}
 	  </h1>
 
-    <p>Click in the map to position your truck and click again or drag the icon to move.</p>
+    <!-- <p>Click in the map to position your truck and click again or drag the icon to move.</p> -->
     <div id="my-map"></div>
     <br><br>
   <!--  Specify your truck's cargo capacity (feel free to choose a reasonable unit of measurement): <input type="textfield" v-model="maxCapacity" @change="updateDriver"/> -->
@@ -53,9 +54,14 @@
       </div>
     </ul>
 
+    <div id="orderbox">
+
+    </div>
     <!--  <div v-if="driverLocation">Utilized capacity: {{ usedCapacity }}/{{ maxCapacity }}</div> -->
 
     <!--<button v-on:click="quit">Quit</button>-->
+
+
 
 
   </div>
