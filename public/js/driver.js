@@ -143,10 +143,13 @@ var vm = new Vue({
         },
         orderPickedUp: function (order) {
             var pickUp = this.orders.orderId;
+            // this.orders
+            // Update used capacity
             if (Number(this.usedCapacity) + Number(order.orderDetails.spaceRequired) > Number(this.maxCapacity))
                 return;
             else {
-                this.usedCapacity += Number(order.orderDetails.spaceRequired);
+                this.usedCapacity = Number(order.orderDetails.spaceRequired) + Number(this.usedCapacity);
+                order.handled = true;
             }
 
             // TODO: Update polyline, remove last segment
@@ -191,7 +194,7 @@ var vm = new Vue({
               content.style.maxHeight = null;
             } else {
               content.style.maxHeight = content.scrollHeight + "px";
-            }
+            } 
     /*if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
