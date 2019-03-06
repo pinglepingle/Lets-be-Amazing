@@ -72,9 +72,24 @@
                       <h4 class="mb-3">Package info</h4>
 
                       <div class="mb-3">
-                        <label for="spaceRequired">Package Weight (kg) </label>
-                        <input type="text" class="form-control" id="spaceRequired" placeholder="20kg" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="spaceRequired">
+                        <!--<label for="spaceRequired">Package Weight (kg) </label> -->
+
+                      <!--  <input type="text" class="form-control" id="spaceRequired" placeholder="20kg" required=""
+                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="spaceRequired">-->
+                        <label for="spaceRequired">Package size </label>
+                        <br>
+                        <div id="packageImages">
+                          <div id="packageimages">
+                            <img src="img/envelope.png" id="envelope">
+                            <img src="img/medium.png" id="mediumbox">
+                            <img src="img/bigbox.png" id="bigbox">
+                         </div>
+                       </div>
+                         <div id="packageimagesboxes">
+                          <input type="radio" name="packageSize" value="Small"> Small <br></input>
+                          <input type="radio" name="packageSize" value="Medium"> Medium <br></input>
+                          <input type="radio" name="packageSize" value="Large"> Large <br></input>
+                        </div>
                         <div class="invalid-feedback">
                           Please enter a package weight
                         </div>
@@ -102,17 +117,23 @@
                     <div class="col-md-3 split-3">
                       <h4 class="mb-3">Sender info</h4>
                       <div class="mb-3">
-                        <label for="senderName">Full name </label>
+                        <label for="senderName">First name </label>
                         <input type="text" class="form-control" id="senderName" placeholder="" value="" required=""
                           data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
                         <div class="invalid-feedback">
-                          Please enter your full name
+                          Please enter your first name
+                        </div>
+                        <label for="senderName">Last name </label>
+                        <input type="text" class="form-control" id="senderName" placeholder="" value="" required=""
+                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
+                        <div class="invalid-feedback">
+                          Please enter your last name
                         </div>
                       </div>
 
                       <div class="mb-3">
                         <label for="senderNumber">Phone Number</label>
-                        <input type="text" class="form-control" id="senderNumber" placeholder="07077799303" required=""
+                        <input type="text" class="form-control" id="senderNumber" placeholder="0707779930" required=""
                           data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderNumber">
                         <div class="invalid-feedback">
                           Please enter your phone number.
@@ -127,16 +148,36 @@
                           Please enter a valid email address
                         </div>
                       </div>
+                      <br>
 
                       <div class="mb-3">
-                          <label for="senderAddress">Address for pickup</label>
+                          <label for="senderAddress">Address </label>
                           <input type="text" class="form-control" id="senderAddress" placeholder="Sernandersväg 64" required=""
                             data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderAddress">
                           <div class="invalid-feedback">
                             Please enter your pickup address.
                           </div>
+                      </div>
+
+                      <div class="mb-3">
+                          <label for="senderAddress">Zip code </label>
+                          <input type="text" class="form-control" id="senderZipcode" placeholder="75434" required=""
+                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderAddress">
+                          <div class="invalid-feedback">
+                            Please enter your pickup address.
+                      </div>
+                      <br>
+                      <div class="mb-3">
+                          <label for="receverAddress">City </label>
+                          <input type="text" class="form-control" id="receverCity" placeholder="Uppsala " required=""
+                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
+                          <div class="invalid-feedback">
+                            Please enter a city.
+                          </div>
                         </div>
+                      </div>
                     </div>
+
 
 
                     <hr class="mb-4-row">
@@ -145,42 +186,59 @@
                     <div class="col-md-3  split-3">
                       <h4 class="mb-3">Receiver info</h4>
                       <div class=" mb-3">
-                        <label for="receverName">Full name </label>
-                        <input type="text" class="form-control" id="receverName" placeholder="" value="" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="receverName">
+                        <label for="senderName">First name </label>
+                        <input type="text" class="form-control" id="senderFisrtName" placeholder="" value="" required=""
+                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
                         <div class="invalid-feedback">
-                          Please enter your full name
+                          Please enter your first name
+                        </div>
+                        <label for="senderName">Last name </label>
+                        <input type="text" class="form-control" id="senderLastName" placeholder="" value="" required=""
+                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
+                        <div class="invalid-feedback">
+                          Please enter your last name
                         </div>
                       </div>
 
                       <div class=" mb-3">
                         <label for="receverNumber">Phone Number</label>
-                        <input type="text" class="form-control" id="receverNumber" placeholder="07077799303" required=""
+                        <input type="text" class="form-control" id="receverNumber" placeholder="0707779930" required=""
                           data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverNumber">
                         <div class="invalid-feedback">
                           Please enter recevers phone number.
                         </div>
                       </div>
-
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
                       <div class=" mb-3">
-                        <label for="receverEmail">Email <span class="text-muted"></span></label>
-                        <input type="email" class="form-control" id="receverEmail" placeholder="you@example.com" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-9" v-model="receverEmail">
+                        <label for="receverAddress">Address </label>
+                        <input type="text" class="form-control" id="receverAddress" placeholder="Gränby Centrum" required=""
+                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
                         <div class="invalid-feedback">
-                          Please enter a valid email address
+                          Please enter your pickup address.
                         </div>
                       </div>
 
                       <div class="mb-3">
-                          <label for="receverAddress">Address for dropoff</label>
-                          <input type="text" class="form-control" id="receverAddress" placeholder="Gränby Centrum" required=""
+                          <label for="receverAddress">Zip code </label>
+                          <input type="text" class="form-control" id="receverZipCode" placeholder="75431 " required=""
                             data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
                           <div class="invalid-feedback">
                             Please enter your pickup address.
                           </div>
                         </div>
 
-
+                      <div class="mb-3">
+                          <label for="receverAddress">City </label>
+                          <input type="text" class="form-control" id="receverCity" placeholder="Uppsala " required=""
+                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
+                          <div class="invalid-feedback">
+                            Please enter a city.
+                          </div>
+                        </div>
                     </div>
 
                     <!--End for "row"-->
