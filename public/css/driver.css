@@ -1,7 +1,7 @@
 
 #my-map {
   position: absolute;
-	top: 13.5%;
+	top: 8%;
 	left: 1%;
   width: 50%;
   height: 78vh;
@@ -15,6 +15,10 @@
   margin-top: 70%;
 }
 
+#capacity {
+
+  margin-left: 3%;
+}
 .driverButtons{
   width: 40%;
   padding: 10px;
@@ -29,7 +33,7 @@
 .driverButtons:active {
   background-color: skyblue;
   border-color: none;
-  
+
 }
 
 .collapsible {
@@ -78,6 +82,7 @@
   width: 480px;
   position: absolute;
   left: 52%;
-  top: 15%;
+  top: 9.5%;
+  overflow-y: auto;
   /*border-radius: 8px;*/
 }
