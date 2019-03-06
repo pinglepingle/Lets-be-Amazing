@@ -30,11 +30,11 @@ var vm = new Vue({
         driverMarkers: {}
     },
     created: function () {
-        // socket.on('initialize', function (data) {
+        socket.on('initialize', function (data) {
         //     // add marker for home base in the map
         //     //this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
         //     //this.baseMarker.bindPopup("This is the dispatch and routing center");
-        // }.bind(this));
+        }.bind(this));
         socket.on('orderId', function (orderId) {
             this.orderId = orderId;
         }.bind(this));
