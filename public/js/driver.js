@@ -190,11 +190,16 @@ var vm = new Vue({
             var clickedOrder = click.target;
             clickedOrder.classList.toggle("active");
             var content = clickedOrder.nextElementSibling;
-            if (content.style.display === "block") {
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+    /*if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
                 content.style.display = "block";
-            }
+            }*/
         }
     },
     computed: {
