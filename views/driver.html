@@ -57,19 +57,24 @@
         <div v-for="order in orders">
           <button v-on:click="togglePackageInfo" class="collapsible"> Rackarberget ➝ Lager </button>
           <div class="content">
-            <button class="driverButtons" v-on:click="orderPickedUp(order)"> Picked up package! </button>
-            <button class="driverButtons" v-on:click="orderDroppedOff(order)"> Dropped off package! </button>
-            <button class="driverButtons"> Call customer </button>
-            <button class="driverButtons"> Call supervisor </button>
+            <button class=driverButtons> Picked up package! </button>
+            <button class=driverButtons> Dropped off package! </button>
+            <button class=driverButtons> Call customer </button>
+            <button class=driverButtons> Call supervisor </button>
           </div>
         </div>
       </div>
       <!--  <div v-if="driverLocation">Utilized capacity: {{ usedCapacity }}/{{ maxCapacity }}</div> -->
 
       <!--<button v-on:click="quit">Quit</button>-->
+
+
+
+
     </div>
     <script>
       // v-bind:style="{ visibility: computeVisibility }"
     </script>
+
   </body>
 </html>
