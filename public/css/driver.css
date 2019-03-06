@@ -1,18 +1,27 @@
 
 #my-map {
+<<<<<<< HEAD
   position: absolute;
 	top: 8%;
 	left: 1%;
   width: 50%;
   height: 78vh;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+=======
+    position: absolute;
+    top: 13.5%;
+    left: 1%;
+    width: 50%;
+    height: 78vh;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+>>>>>>> 082e91ac7f735d5ce119572301ad05d5ac38e7fd
 }
 
 
 #orderinfo {
-  margin-left: 60%;
-  width: 30%;
-  margin-top: 70%;
+    margin-left: 60%;
+    width: 30%;
+    margin-top: 70%;
 }
 
 #capacity {
@@ -20,14 +29,14 @@
   margin-left: 3%;
 }
 .driverButtons{
-  width: 40%;
-  padding: 10px;
-  font-size: 2vh;
-  margin: 5px 15px 4px 4px;
-  margin-left:5%;
-  background-color: lightblue;
-  border-radius: 15px;
-  border-color: none;
+    width: 40%;
+    padding: 10px;
+    font-size: 2vh;
+    margin: 5px 15px 4px 4px;
+    margin-left:5%;
+    background-color: lightblue;
+    border-radius: 15px;
+    border-color: none;
 }
 
 .driverButtons:active {
@@ -37,46 +46,47 @@
 }
 
 .collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
+    background-color: #555;
 }
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
-  padding: 0 18px;
-  max-height: 0;
-  /*display: none;*/
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+    padding: 0 18px;
+    max-height: 0;
+    /*display: none;*/
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
 }
 
 
 .collapsible:after {
-  content: '\002B';
-  color: white;
-  font-weight: bold;
-  float: right;
-  margin-left: 5px;
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
 }
 
 .active:after {
-  content: "\2212";
+    content: "\2212";
 }
 
 
 #orderbox {
+<<<<<<< HEAD
   background-color: #BEFAC2;
   height: 78vh;
   width: 480px;
@@ -85,4 +95,13 @@
   top: 9.5%;
   overflow-y: auto;
   /*border-radius: 8px;*/
+=======
+    background-color: #BEFAC2;
+    height: 78vh;
+    width: 480px;
+    position: absolute;
+    left: 52%;
+    top: 15%;
+    /*border-radius: 8px;*/
+>>>>>>> 082e91ac7f735d5ce119572301ad05d5ac38e7fd
 }
