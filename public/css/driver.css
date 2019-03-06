@@ -1,52 +1,83 @@
 
 #my-map {
-  position: absolute;
-  top: 100%;
-  left: 1%;
-  width: 50%;
-  height: 78vh;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    position: absolute;
+    top: 13.5%;
+    left: 1%;
+    width: 50%;
+    height: 78vh;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
 
 #orderinfo {
-  margin-left: 60%;
-  width: 30%;
-  margin-top: 70%;
+    margin-left: 60%;
+    width: 30%;
+    margin-top: 70%;
 }
 
+.driverButtons{
+    width: 40%;
+    padding: 10px;
+    font-size: 2vh;
+    margin: 5px 15px 4px 4px;
+    margin-left:5%;
+    background-color: lightblue;
+    border-radius: 15px;
+    border-color: none;
+}
+
+.driverButtons:active {
+    background-color: skyblue;
+    border-color: none;
+
+}
 
 .collapsible {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
-  background-color: #ccc;
+    background-color: #555;
 }
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
+    padding: 0 18px;
+    max-height: 0;
+    /*display: none;*/
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
 }
 
+
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+
 #orderbox {
-  background-color: #BEFAC2;
-  height: 700px;
-  width: 480px;
-  position: absolute;
-  left: 52%;
-  top: 15%;
-  border-radius: 8px;
+    background-color: #BEFAC2;
+    height: 78vh;
+    width: 480px;
+    position: absolute;
+    left: 52%;
+    top: 15%;
+    /*border-radius: 8px;*/
 }
