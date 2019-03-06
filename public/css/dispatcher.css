@@ -39,16 +39,14 @@ body {
 #fieldPackages {
     grid-column: 1 / 1;
     grid-row: 2 / 2;
-    overflow-y: auto;
-    overflow-x: none;
+    overflow-y: scroll;
     background-color: #8aacb8;
 }
 
 #inStorage {
     grid-column: 1 / 1;
     grid-row: 4 / 4;
-    overflow-y: auto;
-    overflow-x: none;
+    overflow-y: scroll;
     background-color: #8ab8ac;
 }
 
@@ -82,8 +80,7 @@ body {
 #cars0 {
     grid-column: 2;
     grid-row: 2;
-    overflow-y: auto;
-    overflow-x: none;
+    overflow-y: scroll;
     background-color: #8aacb8;
     height: 90%;
 }
@@ -91,8 +88,7 @@ body {
 #cars1 {
     grid-column: 2;
     grid-row: 4;
-    overflow-y: auto;
-    overflow-x: none;
+    overflow-y: scroll;
     background-color: #8ab8ac;
     height: 90%;
 }
