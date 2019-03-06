@@ -81,15 +81,27 @@ body {
 }
 
 .arrow {
-	position: absolute;
-	z-index: 10;
-	width: 100px;
-	height: 50px;
-	left: 48%;
-	bottom: 2%;
-	animation-name:	bounce;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+    position: absolute;
+    z-index: 10;
+    width: 100px;
+    height: 50px;
+    left: 45%;
+    bottom: 2%;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.arrow-c {
+    position: absolute;
+    z-index: 10;
+    width: 100px;
+    height: 50px;
+    left: 45%;
+    bottom: 20%;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 #choose {

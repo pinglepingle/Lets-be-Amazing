@@ -58,246 +58,218 @@
 
 
         <div class="col-md-8 order-md-1">
-          <form class="needs-validation" novalidate="">
+          <form novalidate="novalidate" class="needs-validation">
             <div class="payment-cont">
-                <div class="row">
-
-                    <div class="split-3 col-md-3 ">
-                      <h4 class="mb-3">Package info</h4>
-
-                      <div class="mb-3">
-                        <label for="spaceRequired">Package size </label>
-                        <br>
-                        <div id="packageImages">
-                          <div id="packageimages">
-                            <img src="img/envelope.png" id="envelope">
-                            <img src="img/medium.png" id="mediumbox">
-                            <img src="img/bigbox.png" id="bigbox">
-                         </div>
-                       </div>
-                         <div id="packageimagesboxes">
-                          <input type="radio" name="packageSize" id="packageSmall" value="Small"> Small <br>
-                          <input type="radio" name="packageSize" id="packageMedium" value="Medium"> Medium <br>
-                          <input type="radio" name="packageSize" id="packageLarge" value="Large"> Large <br>
-                        </div>
-                        <div class="invalid-feedback">
-                          Please enter a package weight
-                        </div>
+              <div class="row white">
+                <div class="col-md-3" style="padding-bottom: 20px;">
+                  <h4 class="mb-3">Package info</h4>
+                  <div class="mb-3"><label for="spaceRequired">Package size </label> <br>
+                    <div id="packageImages">
+                      <div class="packageContainer packageSmall"><img src="img/envelope.png" id="smallBox">
+                        <div class="packageText">
+                          <h6 class="packageHeading">Small</h6> <span>Send an envelope </span>
+                          <p>24x14x1 cm</p>
+                        </div> <span class="packagePrice"> 49 sek </span>
                       </div>
-
-                      <div class="mb-3">
-                        <label for="driverInstructions">Driver instruction</label>
-                        <input type="text" class="form-control" id="driverInstructions" placeholder="Fragile goods"
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="driverInstructions">
+                      <div class="packageContainer packageSmall"><img src="img/medium.png" id="mediumBox">
+                        <div class="packageText">
+                          <h6 class="packageHeading">Medium</h6> <span>An all-round package</span>
+                          <p>34x30x30 cm</p>
+                        </div> <span class="packagePrice"> 99 sek </span>
                       </div>
-
-                      <div>
-                          <input id="expressButton" type="checkbox" class="checkbox" checked="" v-model="express" name="express" value="express">
-                        <input type="checkbox" v-model="express" @change="toggleExpress()" name="express" value="express"
-                          style="visibility: hidden">
-                          <label class="label--checkbox" style="    margin-top: 2px; margin-left: -15px;">
-                              Express delivery
-                            </label>
+                      <div class="packageContainer packageSmall"><img src="img/bigbox.png" id="bigBox">
+                        <div class="packageText">
+                          <h6 class="packageHeading">Large</h6> <span>Packs a heck of a punch</span>
+                          <p>64x110x110 cm</p>
+                        </div> <span class="packagePrice"> 139 sek </span>
                       </div>
                     </div>
-
-                    <hr class="mb-4-row">
-
-                    <div class="col-md-3 split-3">
-                      <h4 class="mb-3">Sender info</h4>
-                      <div class="mb-3">
-                        <label for="senderName">First name </label>
-                        <input type="text" class="form-control" id="senderFirstName" placeholder="" value="" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
-                        <div class="invalid-feedback">
-                          Please enter your first name
-                        </div>
-                        <label for="senderName">Last name </label>
-                        <input type="text" class="form-control" id="senderLastName" placeholder="" value="" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
-                        <div class="invalid-feedback">
-                          Please enter your last name
-                        </div>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="senderNumber">Phone Number</label>
-                        <input type="text" class="form-control" id="senderNumber" placeholder="0707779930" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderNumber">
-                        <div class="invalid-feedback">
-                          Please enter your phone number.
-                        </div>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="senderEmail">Email <span class="text-muted"></span></label>
-                        <input type="email" class="form-control" id="senderEmail" placeholder="you@example.com" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-9" v-model="senderEmail">
-                        <div class="invalid-feedback">
-                          Please enter a valid email address
-                        </div>
-                      </div>
-                      <br>
-
-                      <div class="mb-3">
-                          <label for="senderAddress">Address </label>
-                          <input type="text" class="form-control" id="senderAddress" placeholder="Sernandersväg 64" required=""
-                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderAddress">
-                          <div class="invalid-feedback">
-                            Please enter your pickup address.
-                          </div>
-                      </div>
-
-                      <div class="mb-3">
-                          <label for="senderAddress">Zip code </label>
-                          <input type="text" class="form-control" id="senderZipcode" placeholder="75434" required=""
-                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="senderAddress">
-                          <div class="invalid-feedback">
-                            Please enter your pickup address.
-                      </div>
-                      <br>
-                      <div class="mb-3">
-                          <label for="receverAddress">City </label>
-                          <input type="text" class="form-control" id="receverCity" placeholder="Uppsala " required=""
-                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
-                          <div class="invalid-feedback">
-                            Please enter a city.
-                          </div>
-                        </div>
-                      </div>
+                    <div class="invalid-feedback">
+                      Please enter a package weight
                     </div>
-
-
-
-                    <hr class="mb-4-row">
-
-
-                    <div class="col-md-3  split-3">
-                      <h4 class="mb-3">Receiver info</h4>
-                      <div class=" mb-3">
-                        <label for="senderName">First name </label>
-                        <input type="text" class="form-control" id="senderFisrtName" placeholder="" value="" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
-                        <div class="invalid-feedback">
-                          Please enter your first name
-                        </div>
-                        <label for="senderName">Last name </label>
-                        <input type="text" class="form-control" id="senderLastName" placeholder="" value="" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6" v-model="senderName">
-                        <div class="invalid-feedback">
-                          Please enter your last name
-                        </div>
-                      </div>
-
-                      <div class=" mb-3">
-                        <label for="receverNumber">Phone Number</label>
-                        <input type="text" class="form-control" id="receverNumber" placeholder="0707779930" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverNumber">
-                        <div class="invalid-feedback">
-                          Please enter recevers phone number.
-                        </div>
-                      </div>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <div class=" mb-3">
-                        <label for="receverAddress">Address </label>
-                        <input type="text" class="form-control" id="receverAddress" placeholder="Gränby Centrum" required=""
-                          data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
-                        <div class="invalid-feedback">
-                          Please enter your pickup address.
-                        </div>
-                      </div>
-
-                      <div class="mb-3">
-                          <label for="receverAddress">Zip code </label>
-                          <input type="text" class="form-control" id="receverZipCode" placeholder="75431 " required=""
-                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
-                          <div class="invalid-feedback">
-                            Please enter your pickup address.
-                          </div>
-                        </div>
-
-                      <div class="mb-3">
-                          <label for="receverAddress">City </label>
-                          <input type="text" class="form-control" id="receverCity" placeholder="Uppsala " required=""
-                            data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" v-model="receverAddress">
-                          <div class="invalid-feedback">
-                            Please enter a city.
-                          </div>
-                        </div>
-                    </div>
-
-                    <!--End for "row"-->
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8 mb-3" style="padding-left: 0px; margin-left: 0px;"><label for="driverInstructions">Driver
+                        instruction</label> <input type="text" id="driverInstructions" placeholder=""
+                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="form-control"></div>
+                    <div class="col-md-2 mb-3" style="width: 150px; padding-left: 0px;"><label for="expressButton">Express
+                        Delivery</label> <input id="expressButton" type="checkbox" name="express" value="express"
+                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="checkbox"></div>
+                  </div>
                 </div>
-                <div class="payment">
-                    <div class="payment-background">
-
-                      <div class="payment-content">
-                        <div class="payment-opt">
-                            <h4 class="mb-3">Payment</h4>
-
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="ccname">Name on card</label>
-                            <input type="text" class="form-control" id="ccname" placeholder="" required=""
-                              data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-13" v-model="ccname">
-                            <small class="text-muted">Full name as displayed on card</small>
-                            <div class="invalid-feedback">
-                              Name on card is required
-                            </div>
-                           </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="ccnumber">Credit card number</label>
-                            <input type="number" class="form-control" id="ccnumber" placeholder="" required=""
-                              data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-14" v-model="ccnumber">
-                            <div class="invalid-feedback">
-                              Credit card number is required
-                            </div>
-                           </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <label for="ccexpiration">Expiration</label>
-                            <input type="text" class="form-control" id="ccexpiration" placeholder="" required="" v-model="ccexpiration">
-                            <div class="invalid-feedback">
-                              Expiration date required
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <label for="cccvv">CVV</label>
-                            <input type="number" class="form-control" id="cccvv" placeholder="" required=""
-                              data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-15" v-model="cccvv">
-                            <div class="invalid-feedback">
-                              Security code required
-                            </div>
-                            </div>
-                        </div>
+                <div class="senderInfoBox split-2">
+                  <h4 class="mb-info-3">Sender info</h4>
+                  <div class="row">
+                    <div class="mb-info-3"><label for="senderName">First name </label> <input type="text" id="senderFirstName"
+                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your first name
                       </div>
-                      <hr class="mb-4">
                     </div>
+                    <div class="mb-info-3"><label for="senderName">Last name </label> <input type="text" id="senderLastName"
+                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your last name
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-info-6"><label for="senderAddress">Address </label> <input type="text" id="senderAddress"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control">
+                    <div class="invalid-feedback">
+                      Please enter your pickup address.
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-info-3"><label for="senderAddress">Zip code </label> <input type="text" id="senderZipcode"
+                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your pickup address.
+                      </div>
+                    </div>
+                    <div class="mb-info-3"><label for="receverAddress">City </label> <input type="text" id="receverCity"
+                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter a city.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-info-6"><label for="senderNumber">Phone Number</label> <input type="text" id="senderNumber"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control">
+                    <div class="invalid-feedback">
+                      Please enter your phone number.
+                    </div>
+                  </div>
+                  <div class="mb-info-6"><label for="senderEmail">Email Sender <span class="text-muted"></span></label>
+                    <input type="email" id="senderEmail" placeholder="" required="required" data-kwimpalastatus="alive"
+                      data-kwimpalaid="1551021057611-9" class="form-control">
+                    <div class="invalid-feedback">
+                      Please enter a valid email address
+                    </div>
+                  </div> <br>
+                </div>
+                <hr class="mb-4-row">
+                <div class="reciverInfoBox split-2">
+                  <h4 class="mb-info-3">Receiver info</h4>
+                  <div class="row">
+                    <div class="mb-info-3"><label for="senderName">First name </label> <input type="text" id="senderFisrtName"
+                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your first name
+                      </div>
+                    </div>
+                    <div class="mb-info-3"><label for="senderName">Last name </label> <input type="text" id="senderLastName"
+                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your last name
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" mb-info-6"><label for="receverAddress">Address </label> <input type="text" id="receverAddress"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control">
+                    <div class="invalid-feedback">
+                      Please enter your pickup address.
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-info-3"><label for="receverAddress">Zip code </label> <input type="text" id="receverZipCode"
+                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter your pickup address.
+                      </div>
+                    </div>
+                    <div class="mb-info-3"><label for="receverAddress">City </label> <input type="text" id="receverCity"
+                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control">
+                      <div class="invalid-feedback">
+                        Please enter a city.
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" mb-info-6"><label for="receverNumber">Phone Number</label> <input type="text" id="receverNumber"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control">
+                    <div class="invalid-feedback">
+                      Please enter recevers phone number.
+                    </div>
+                  </div>
+                  <div class="mb-info-6"><label for="receverEmail">Email Reciver (Optional)</label> <input type="text"
+                      id="receverEmail" placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control"></div>
                 </div>
               </div>
-              <button class="btn btn-primary btn-lg btn-block" type="submit" v-on:click="placeOrder">Continue to checkout</button>
+            </div>
+
+
+
+            <a href="#paymentContent" class="bounce">
+                <img src="http://www.recognosco.net/assets/images/icon-down-arrow-white.png?fbclid=IwAR0jPQoO0zsK1uQ8a-Ce8HZUQk9HtZGk125oYUo8WoM_mVbED5DV0cfKnE0" class="arrow-c">
+              </a>
+        
+
+
+            <div class="payment" id="paymentContent">
+              <div class="paymentInfoBox">
+                <h4 class="mb-info-3">Sender info</h4>
+                <div class="row">
+                  <div class="mb-info-3" style="padding-right: 35px;"><label for="ccname">Name on card</label> <input type="text" id="ccname"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-13"
+                      class="form-control"> <small class="text-muted">Full name as displayed on card</small>
+                    <div class="invalid-feedback">
+                      Name on card is required
+                    </div>
+                  </div>
+                  <div class="mb-info-3" style="padding-left: 35px;"><label for="ccnumber">Credit card number</label> <input type="number" id="ccnumber"
+                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-14"
+                      class="form-control">
+                    <div class="invalid-feedback">
+                      Credit card number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-info-3" style="padding-right: 35px;"><label for="ccexpiration">Expiration</label> <input type="text" id="ccexpiration"
+                      placeholder="" required="required" class="form-control">
+                    <div class="invalid-feedback">
+                      Expiration date required
+                    </div>
+                  </div>
+                  <div class="mb-info-3" style="padding-left: 35px;"><label for="cccvv">CVV</label> <input type="number" id="cccvv" placeholder=""
+                      required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-15" class="form-control">
+                    <div class="invalid-feedback">
+                      Security code required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin: 10px 10%; width: 80%;">Continue
+                to checkout</button>
+            </div>
           </form>
         </div>
+      </div>  
+
+      
+
+  </div>
 
 
 
-      </div>
-
-
-
-    </section>
+  </section>
 
 
 
 
-<!--
+  <!--
 
     <div id="packageInfo">
       <form  id="packageDetails">
@@ -433,11 +405,23 @@
   <br>
   <br>
 
-
+<footer>
+  asdasdasd
+</footer>
   </div>
   <script src="js/form-validation.js">
-
   </script>
+
+  <script>
+    $(document).ready(function () {
+      $(".packageContainer").click(
+        function (event) {
+          $(this).addClass("active").siblings().removeClass("active");
+        }
+      );
+    });
+  </script>
+
 </body>
 
 </html>
