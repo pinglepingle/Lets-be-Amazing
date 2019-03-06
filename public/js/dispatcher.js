@@ -11,9 +11,12 @@ var vm = new Vue({
         drivers: {},
         customerMarkers: {},
         driverMarkers: {},
-        baseMarker: null
+        baseMarker: null,
+        selectedFieldPackages: [],
+        selectedStoragePackages: [],
+        selectedFieldCar: null,
+        selectedStorageCar: null
     },
-
     created: function () {
         socket.on('initialize', function (data) {
             this.orders = data.orders;
@@ -145,6 +148,45 @@ var vm = new Vue({
         },
         assignDriver: function (order) {
             socket.emit("driverAssigned", order);
+        },
+        adjustFieldPackages: function (click) {
+            var checkmark = click.target;
+            var id = checkmark.nextElementSibling.innerHTML;
+            if (checkmark.checked && !this.selectedFieldPackages.includes(id)) {
+                this.selectedFieldPackages.push(id);
+            } else if (!checkmark.checked && this.selectedFieldPackages.includes(id)) {
+                let index = this.selectedFieldPackages.indexOf(id);
+                this.selectedFieldPackages.splice(index, 1);
+            }
+            console.log(this.selectedFieldPackages);
+        },
+        adjustStoragePackages: function (click) {
+            var checkmark = click.target;
+            var id = checkmark.nextElementSibling.innerHTML;
+            if (checkmark.checked && !this.selectedStoragePackages.includes(id)) {
+                this.selectedStoragePackages.push(id);
+            } else if (!checkmark.checked && this.selectedStoragePackages.includes(id)) {
+                let index = this.selectedStoragePackages.indexOf(id);
+                this.selectedStoragePackages.splice(index, 1);
+            }
+        },
+        adjustSelectedFieldCar: function (click) {
+            var target = click.target;
+            var id = target.nextElementSibling.innerHTML;
+            if (target.checked) {
+                this.selectedFieldCar = id;
+            } else if (!checkmark.checked && this.selectedFieldCar === id) {
+                this.selectedFieldCar = null;
+            }
+        },
+        adjustSelectedStorageCar: function (click) {
+            var target = click.target;
+            var id = target.nextElementSibling.innerHTML;
+            if (target.checked) {
+                this.selectedStorageCar = id;
+            } else if (!checkmark.checked && this.selectedStorageCar === id) {
+                this.selectedStorageCar = null;
+            }
         }
     }
 });
