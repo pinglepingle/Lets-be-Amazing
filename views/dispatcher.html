@@ -49,7 +49,8 @@
             </span>
           </div>
         </div>
-        <button v-bind:class="{ confirmcar: selectedFieldPackages.length > 0 && selectedFieldCar, disabledButton: selectedFieldPackages.length == 0 || !selectedFieldCar }">Confirm</button>
+        <button v-bind:class="{ confirmcar: selectedFieldPackages.length > 0 && selectedFieldCar, disabledButton: selectedFieldPackages.length == 0 || !selectedFieldCar }"
+                v-on:click="addOrders">Confirm</button>
         <div id="driver1">Available drivers</div>
         <div id="cars1">
           <div v-for="driver in drivers" class="driv">

@@ -146,8 +146,28 @@ var vm = new Vue({
             var connectMarkers = L.polyline(this.getPolylinePoints(order), {color: 'blue'}).addTo(this.map);
             return {from: fromMarker, dest: destMarker, line: connectMarkers};
         },
-        assignDriver: function (order) {
-            socket.emit("driverAssigned", order);
+        assignFieldDriver: function () {
+            let selectedOrders = [];
+            for (var i = 0; i < selectedFieldPackages.length; i++) {
+                let order = this.orders[Number(selectedFieldPackages[i])];
+                order.driverId = this.selectedFieldCar;
+                selectedOrders.push();
+            }
+
+            for (var i = 0; i < selectedOrders.length; i++) {
+                let order = selectedOrders[i];
+                socket.emit("driverAssigned", order);
+            }
+
+            checkboxes = document.getElementsByName("fieldOrdersCheckbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+
+            drivers = document.getElementsByName("fieldDrivers");
+            for (var i = 0; i < fieldDrivers.length; i++) {
+                fieldDrivers[i].checked = false;
+            }
         },
         adjustFieldPackages: function (click) {
             var checkmark = click.target;

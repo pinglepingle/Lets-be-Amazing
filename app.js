@@ -161,7 +161,7 @@ io.on('connection', function (socket) {
         data.updateOrderDetails(order);
         io.emit('orderPickedUp', order);
     });
-    socket.on('driverAssigned', function(order) {
+    socket.on('driverAssigned', function(orders) {
         // Track assigned driver by adding driverId to the order
         console.log("Order",order.orderId,"was assigned to driver",order.driverId);
         data.updateOrderDetails(order);
