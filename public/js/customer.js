@@ -100,7 +100,7 @@ var vm = new Vue({
         //         this.fromMarker = L.marker(data.latlng, {icon: this.fromIcon, draggable: true}).addTo(this.map);
         //         this.fromMarker.on("drag", this.moveMarker);
         //     }
-        
+
         //     // Check if one can draw the marker distance
         //     if(this.destMarker !== null) {
         //         this.connectMarkers = L.polyline(this.getPolylinePoints(), {color: 'blue'}).addTo(this.map);
@@ -130,7 +130,7 @@ var vm = new Vue({
                 });
             }
 
-           
+
 
         },
         // getPolylinePoints: function() {
@@ -186,8 +186,12 @@ var vm = new Vue({
             document.getElementById('invoice').style.display ='block';
             document.getElementById('swish').style.display ='none';
             document.getElementById('creditCard').style.display ='none';
+        },
+        showInfo: function(event) {
+          document.getElementById('driverInfoBox').style.display='block';
         }
     }
+
 });
 
 
@@ -361,7 +365,7 @@ var vm = new Vue({
       } else {
         return [this.fromMarker.getLatLng(), this.baseMarker.getLatLng(), this.destMarker.getLatLng()];
       }
-      
+
     created: function () {
         socket.on('initialize', function (data) {
             // add marker for home base in the map
