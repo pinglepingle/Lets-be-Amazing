@@ -1,20 +1,11 @@
 
 #my-map {
-<<<<<<< HEAD
   position: absolute;
 	top: 8%;
 	left: 1%;
   width: 50%;
   height: 78vh;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-=======
-    position: absolute;
-    top: 13.5%;
-    left: 1%;
-    width: 50%;
-    height: 78vh;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
->>>>>>> 082e91ac7f735d5ce119572301ad05d5ac38e7fd
 }
 
 
@@ -86,7 +77,6 @@
 
 
 #orderbox {
-<<<<<<< HEAD
   background-color: #BEFAC2;
   height: 78vh;
   width: 480px;
@@ -95,13 +85,4 @@
   top: 9.5%;
   overflow-y: auto;
   /*border-radius: 8px;*/
-=======
-    background-color: #BEFAC2;
-    height: 78vh;
-    width: 480px;
-    position: absolute;
-    left: 52%;
-    top: 15%;
-    /*border-radius: 8px;*/
->>>>>>> 082e91ac7f735d5ce119572301ad05d5ac38e7fd
 }
