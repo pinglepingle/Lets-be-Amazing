@@ -165,8 +165,31 @@ var vm = new Vue({
             }
 
             drivers = document.getElementsByName("fieldDrivers");
-            for (var i = 0; i < fieldDrivers.length; i++) {
-                fieldDrivers[i].checked = false;
+            for (var i = 0; i < drivers.length; i++) {
+                drivers[i].checked = false;
+            }
+        },
+        assignStorageDriver: function () {
+            let selectedOrders = [];
+            for (var i = 0; i < selectedStoragePackages.length; i++) {
+                let order = this.orders[Number(selectedStoragePackages[i])];
+                order.driverId = this.selectedStorageCar;
+                selectedOrders.push();
+            }
+
+            for (var i = 0; i < selectedOrders.length; i++) {
+                let order = selectedOrders[i];
+                socket.emit("driverAssigned", order);
+            }
+
+            checkboxes = document.getElementsByName("storageOrdersCheckbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+
+            drivers = document.getElementsByName("storageDrivers");
+            for (var i = 0; i < drivers.length; i++) {
+                drivers[i].checked = false;
             }
         },
         adjustFieldPackages: function (click) {
