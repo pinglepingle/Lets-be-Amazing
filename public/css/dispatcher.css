@@ -13,9 +13,8 @@ body {
 }
 
 #orderColumns > #field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-grid;
+    grid-template-columns: 10% 10% 30% 35% 15%;
     grid-column: 1;
     grid-row: 1;
     background-color: ;
@@ -25,9 +24,8 @@ body {
 }
 
 #orderColumns > #storage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-grid;
+    grid-template-columns: 10% 10% 30% 35% 15%;
     grid-column: 1;
     grid-row: 3;
     background-color: ;

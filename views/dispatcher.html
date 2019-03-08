@@ -16,27 +16,35 @@
     <div id="page">
       <div id="orderColumns">
         <div id="my-map"></div>
-        <div id="field">Packages to pick up</div>
+        <div id="field">
+          <span style="grid-column: 2; display: flex; justify-content: center; align-items: center;">ID</span>
+          <span style="grid-column: 3; display: flex; justify-content: center; align-items: center;">From</span>
+          <span style="grid-column: 4; display: flex; justify-content: center; align-items: center;">To</span>
+          <span style="grid-column: 5; display: flex; justify-content: center; align-items: center;">Express</span>
+        </div>
         <div id="fieldPackages">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 0" class="order">
               <input type="checkbox" name="fieldOrdersCheckbox" style="grid-column 1 / 1; display: flex; justify-content: center;" v-on:click="adjustFieldPackages"></input>
               <span style="grid-column: 2 / 2;">{{ order.orderId}}<br></span>
-              <span style="grid-column: 3 / 3;">{{ order.senderAddress }}<br></span>
-              <span style="grid-column: 4 / 4;">{{ order.recieverAddress }}<br></span>
+              <span style="grid-column: 3 / 3;">{{ order.senderAddress }}\t➞<br></span>
+              <span style="grid-column: 4 / 4;">{{ order.express ? order.recieverAddress : "Lager" }}<br></span>
               <span style="grid-column: 5 / 5;"><b>{{ order.express ? "Express" : "" }}</b><br><br></span>
            </div>
           </div>
         </div>
-        <div id="storage">Packages in storage</div>
+        <div id="storage">
+          <span style="grid-column: 2; display: flex; justify-content: center; align-items: center;">ID</span>
+          <span style="grid-column: 3; display: flex; justify-content: center; align-items: center;">From</span>
+          <span style="grid-column: 4; display: flex; justify-content: center; align-items: center;">To</span>
+        </div>
         <div id="inStorage">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.status === 2" class="order">
               <input type="checkbox" name="storageOrdersCheckbox" style="grid-column 1 / 1; display: flex; justify-content: center;" v-on:click="adjustStoragePackages"></input>
-              <span style="grid-column: 2 / 2;">{{ order.orderId}}</span><br>
+              <span style="grid-column: 2 / 2;">{{ order.orderId }}</span><br>
               <span style="grid-column: 3 / 3;">{{ order.senderAddress }}</span><br>
               <span style="grid-column: 4 / 4;">{{ order.recieverAddress }}</span><br>
-              <span style="grid-column: 5 / 5;"><b>{{ order.express ? "Express" : "" }}</b><br><br></span>
             </div>
           </div>
         </div>
