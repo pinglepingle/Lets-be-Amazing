@@ -147,9 +147,16 @@
                   </div>
                   <div class="row">
                     <div class="col-md-8 mb-3" style="padding-left: 0px; margin-left: 0px;"><label for="driverInstructions"> Information for the driver (optional)</label>
-                      <span><img class="popup"id="infoPic" onclick="showInfo()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1024px-Infobox_info_icon.svg.png" style="height:20px;margin-left:5px;margin-bottom:-4px"></span> <input type="text" id="driverInstructions" placeholder=""
-                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class=""></div>
-                        <span class="popuptext" id="driverInfoBox"> Information about the package or location the driver should know about. E.g fragile package or door code to appartment.</span>
+
+
+                      <div onclick="showInfo()" class="popup">
+                        <img id="infoPic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1024px-Infobox_info_icon.svg.png" style="height:20px;margin-left:5px;margin-bottom:-4px">
+                        <span class="popuptext" id="driverInfoBox">A Simple Popup!</span>
+                      </div>
+
+                      <input type="text" id="driverInstructions" placeholder=""
+                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="form-control">
+                    </div>
 
 
                     <div class="col-md-2 mb-3" style="width: 150px; padding-left: 0px;"><label for="expressButton">Express
