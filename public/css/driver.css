@@ -1,11 +1,11 @@
 
 #my-map {
-    position: absolute;
-    top: 13.5%;
-    left: 1%;
-    width: 50%;
-    height: 78vh;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  position: absolute;
+	top: 8%;
+	left: 1%;
+  width: 50%;
+  height: 78vh;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
 
 
@@ -15,6 +15,10 @@
     margin-top: 70%;
 }
 
+#capacity {
+
+  margin-left: 3%;
+}
 .driverButtons{
     width: 40%;
     padding: 10px;
@@ -27,8 +31,8 @@
 }
 
 .driverButtons:active {
-    background-color: skyblue;
-    border-color: none;
+  background-color: skyblue;
+  border-color: none;
 
 }
 
@@ -73,11 +77,12 @@
 
 
 #orderbox {
-    background-color: #BEFAC2;
-    height: 78vh;
-    width: 480px;
-    position: absolute;
-    left: 52%;
-    top: 15%;
-    /*border-radius: 8px;*/
+  background-color: #BEFAC2;
+  height: 78vh;
+  width: 480px;
+  position: absolute;
+  left: 52%;
+  top: 9.5%;
+  overflow-y: auto;
+  /*border-radius: 8px;*/
 }
