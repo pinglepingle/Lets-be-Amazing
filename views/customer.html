@@ -160,16 +160,16 @@
                 <div class="senderInfoBox split-2">
                   <h4 class="mb-info-3">Sender info</h4>
                   <div class="row">
-                    <div class="mb-info-3"><label for="senderName">First name </label> <input type="text" id="senderFirstName"
+                    <div class="mb-info-3"><label for="senderFirstName">First name </label> <input type="text" id="senderFirstName"
                         placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
-                        class="form-control">
+                        class="form-control" v-model="senderFirstName">
                       <div class="invalid-feedback">
                         Please enter your first name
                       </div>
                     </div>
-                    <div class="mb-info-3"><label for="senderName">Last name </label> <input type="text" id="senderLastName"
+                    <div class="mb-info-3"><label for="senderLastName">Last name </label> <input type="text" id="senderLastName"
                         placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
-                        class="form-control">
+                        class="form-control" v-model="senderLastName">
                       <div class="invalid-feedback">
                         Please enter your last name
                       </div>
@@ -177,22 +177,22 @@
                   </div>
                   <div class="mb-info-6"><label for="senderAddress">Address </label> <input type="text" id="senderAddress"
                       placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                      class="form-control">
+                      class="form-control" v-model="senderAddress">
                     <div class="invalid-feedback">
                       Please enter your pickup address.
                     </div>
                   </div>
                   <div class="row">
-                    <div class="mb-info-3"><label for="senderAddress">Zip code </label> <input type="text" id="senderZipcode"
+                    <div class="mb-info-3"><label for="senderZipcode">Zip code </label> <input type="text" id="senderZipcode"
                         placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                        class="form-control">
+                        class="form-control" v-model="senderZipcode">
                       <div class="invalid-feedback">
                         Please enter your pickup address.
                       </div>
                     </div>
-                    <div class="mb-info-3"><label for="receverAddress">City </label> <input type="text" id="receverCity"
+                    <div class="mb-info-3"><label for="senderCity">City </label> <input type="text" id="senderCity"
                         placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                        class="form-control">
+                        class="form-control" v-model="senderCity">
                       <div class="invalid-feedback">
                         Please enter a city.
                       </div>
@@ -200,71 +200,74 @@
                   </div>
                   <div class="mb-info-6"><label for="senderNumber">Phone Number</label> <input type="text" id="senderNumber"
                       placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                      class="form-control">
+                      class="form-control" v-model="senderNumber">
                     <div class="invalid-feedback">
                       Please enter your phone number.
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="senderEmail">Email Sender <span class="text-muted"></span></label>
                     <input type="email" id="senderEmail" placeholder="" required="required" data-kwimpalastatus="alive"
-                      data-kwimpalaid="1551021057611-9" class="form-control">
+                      data-kwimpalaid="1551021057611-9" class="form-control" v-model="senderEmail">
                     <div class="invalid-feedback">
                       Please enter a valid email address
                     </div>
                   </div> <br>
                 </div>
+
+                <!-- Reciver Info -->
                 <hr class="mb-4-row">
                 <div class="reciverInfoBox split-2">
                   <h4 class="mb-info-3">Receiver info</h4>
                   <div class="row">
-                    <div class="mb-info-3"><label for="senderName">First name </label> <input type="text" id="senderFisrtName"
+                    <div class="mb-info-3"><label for="receverFirstName">First name </label> <input type="text" id="receverFirstName"
                         placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
-                        class="form-control">
+                        class="form-control" v-model="receverFirstName">
                       <div class="invalid-feedback">
                         Please enter your first name
                       </div>
                     </div>
-                    <div class="mb-info-3"><label for="senderName">Last name </label> <input type="text" id="senderLastName"
+                    <div class="mb-info-3"><label for="receverLastName">Last name </label> <input type="text" id="receverLastName"
                         placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
-                        class="form-control">
+                        class="form-control" v-model="receverLastName">
                       <div class="invalid-feedback">
                         Please enter your last name
                       </div>
                     </div>
                   </div>
                   <div class=" mb-info-6"><label for="receverAddress">Address </label> <input type="text" id="receverAddress"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                      class="form-control">
+                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control" v-model="receverAddress">
                     <div class="invalid-feedback">
                       Please enter your pickup address.
                     </div>
                   </div>
                   <div class="row">
-                    <div class="mb-info-3"><label for="receverAddress">Zip code </label> <input type="text" id="receverZipCode"
-                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                        class="form-control">
+                    <div class="mb-info-3"><label for="receverZipCode">Zip code </label> <input type="text" id="receverZipCode"
+                        placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control" v-model="receverZipCode">
                       <div class="invalid-feedback">
                         Please enter your pickup address.
                       </div>
                     </div>
-                    <div class="mb-info-3"><label for="receverAddress">City </label> <input type="text" id="receverCity"
-                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                        class="form-control">
+                    <div class="mb-info-3"><label for="receverCity">City </label> <input type="text" id="receverCity"
+                        placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        class="form-control" v-model="receverCity">
                       <div class="invalid-feedback">
                         Please enter a city.
                       </div>
                     </div>
                   </div>
                   <div class=" mb-info-6"><label for="receverNumber">Phone Number</label> <input type="text" id="receverNumber"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                      class="form-control">
+                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      class="form-control" v-model="receverNumber">
                     <div class="invalid-feedback">
                       Please enter receivers phone number.
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="receverEmail">Email Receiver (Optional)</label> <input type="text"
                       id="receverEmail" placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
-                      class="form-control"></div>
+                      class="form-control" v-model="receverEmail">
+                  </div>
                 </div>
               </div>
             </div>
@@ -282,15 +285,15 @@
                 <h4 class="mb-info-3">Sender info</h4>
                 <div class="row">
                   <div class="mb-info-3" style="padding-right: 35px;"><label for="ccname">Name on card</label> <input type="text" id="ccname"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-13"
-                      class="form-control"> <small class="text-muted">Full name as displayed on card</small>
+                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-13"
+                      class="form-control" v-model="ccname"> <small class="text-muted">Full name as displayed on card</small>
                     <div class="invalid-feedback">
                       Name on card is required
                     </div>
                   </div>
                   <div class="mb-info-3" style="padding-left: 35px;"><label for="ccnumber">Credit card number</label> <input type="number" id="ccnumber"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-14"
-                      class="form-control">
+                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-14"
+                      class="form-control" v-model="ccnumber">
                     <div class="invalid-feedback">
                       Credit card number is required
                     </div>
@@ -298,20 +301,20 @@
                 </div>
                 <div class="row">
                   <div class="mb-info-3" style="padding-right: 35px;"><label for="ccexpiration">Expiration</label> <input type="text" id="ccexpiration"
-                      placeholder="" required="required" class="form-control">
+                      placeholder=""  class="form-control" v-model="ccexpiration">
                     <div class="invalid-feedback">
                       Expiration date required
                     </div>
                   </div>
                   <div class="mb-info-3" style="padding-left: 35px;"><label for="cccvv">CVV</label> <input type="number" id="cccvv" placeholder=""
-                      required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-15" class="form-control">
+                      data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-15" class="form-control" v-model="cccvv">
                     <div class="invalid-feedback">
                       Security code required
                     </div>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin: 10px 10%; width: 80%;">Continue
+              <button v-on:click="placeOrder" type="submit" class="btn btn-primary btn-lg btn-block" style="margin: 10px 10%; width: 80%;">Continue
                 to checkout</button>
             </div>
           </form>
@@ -466,7 +469,7 @@
   <br>
 
 <footer>
-  asdasdasd
+
 </footer>
   </div>
   <script src="js/form-validation.js">

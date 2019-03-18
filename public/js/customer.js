@@ -15,25 +15,29 @@ var vm = new Vue({
         spaceRequired: 0,
         totalGrams: 0,
         driverInstructions: "",
-        senderName: "",
+        senderFirstName: "",
+        senderLastName: "",
+        senderZipcode: "",
+        senderCity: "",
         senderNumber: "",
         senderEmail: "",
-        senderAddress:"",
-        receverName:"",
-        receverNumber:"",
-        receverEmail:"",
-        receverAddress:"",
-        ccname:"",
-        ccnumber:"",
-        ccexpiration:"",
-        cccvv:"",
+        receverFirstName: "",
+        receverLastName: "",
+        receverZipcode: "",
+        receverCity: "",
+        receverNumber: "",
+        receverEmail: "",
+        ccname: "",
+        ccnumber: "",
+        ccexpiration: "",
+        cccvv: "",
         driverMarkers: {}
     },
     created: function () {
         socket.on('initialize', function (data) {
-        //     // add marker for home base in the map
-        //     //this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
-        //     //this.baseMarker.bindPopup("This is the dispatch and routing center");
+            //     // add marker for home base in the map
+            //     //this.baseMarker = L.marker(data.base, {icon: this.baseIcon}).addTo(this.map);
+            //     //this.baseMarker.bindPopup("This is the dispatch and routing center");
         }.bind(this));
         socket.on('orderId', function (orderId) {
             this.orderId = orderId;
@@ -110,22 +114,37 @@ var vm = new Vue({
 
     },
     methods: {
-        placeOrder: function() {
-
-            if(this.senderName !== "" ) {
+        placeOrder: function () {
+            if (this.senderFirstName !== "") {
                 socket.emit("placeOrder", {
-                    fromLatLong: [59.8490512210841,17.600974144749024],
-                    destLatLong: [59.8490512210841,17.600974144749024],
+                    fromLatLong: [59.8490512210841, 17.600974144749024],
+                    destLatLong: [59.8490512210841, 17.600974144749024],
                     expressOrAlreadyProcessed: this.express ? true : false,
                     handled: false,
                     orderDetails: {
                         pieces: 1,
-                        spaceRequired: this.spaceRequired,
-                        totalGrams: this.totalGrams,
+                        spaceRequired:      this.spaceRequired,
+                        totalGrams:         this.totalGrams,
                         driverInstructions: this.driverInstructions,
-                        origin: this.origin,
-                        status: 0,
-                        express: this.express
+                        origin:             this.origin,
+                        status:             0,
+                        express:            this.express,
+                        senderFirstName:    this.senderFirstName,
+                        senderLastName:     this.senderLastName,
+                        senderZipcode:      this.senderZipcode,
+                        senderCity:         this.senderCity,
+                        senderNumber:       this.senderNumber,
+                        senderEmail:        this.senderEmail,
+                        receverFirstName:   this.receverFirstName,
+                        receverLastName:    this.receverLastName,
+                        receverZipcode:     this.receverZipcode,
+                        receverCity:        this.receverCity,
+                        receverNumber:      this.receverNumber,
+                        receverEmail:       this.receverEmail,
+                        ccname:             this.ccname,
+                        ccnumber:           this.ccnumber,
+                        ccexpiration:       this.ccexpiration,
+                        cccvv:              this.cccvv
                     }
                 });
             }
@@ -172,15 +191,15 @@ var vm = new Vue({
 
             this.express == true;
         },
-        swish: function(event) {
-            document.getElementById('swish').style.display ='block';
-            document.getElementById('creditCard').style.display ='none';
-            document.getElementById('invoice').style.display ='none';
+        swish: function (event) {
+            document.getElementById('swish').style.display = 'block';
+            document.getElementById('creditCard').style.display = 'none';
+            document.getElementById('invoice').style.display = 'none';
         },
-        creditCard: function(event) {
-            document.getElementById('creditCard').style.display ='block';
-            document.getElementById('swish').style.display ='none';
-            document.getElementById('invoice').style.display ='none';
+        creditCard: function (event) {
+            document.getElementById('creditCard').style.display = 'block';
+            document.getElementById('swish').style.display = 'none';
+            document.getElementById('invoice').style.display = 'none';
         },
         invoice: function(event) {
             document.getElementById('invoice').style.display ='block';
@@ -190,6 +209,9 @@ var vm = new Vue({
         showInfo: function(event) {
           document.getElementById('driverInfoBox').style.display='block';
         }
+
+
+
     }
 
 });
