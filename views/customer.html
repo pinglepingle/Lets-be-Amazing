@@ -22,7 +22,64 @@
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
 
 </head>
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style>
 <style>
   #custumerDetails {
       width: 60%;
@@ -89,9 +146,19 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-8 mb-3" style="padding-left: 0px; margin-left: 0px;"><label for="driverInstructions">Driver
-                        instruction</label> <input type="text" id="driverInstructions" placeholder=""
-                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="form-control"></div>
+                    <div class="col-md-8 mb-3" style="padding-left: 0px; margin-left: 0px;"><label for="driverInstructions"> Information for the driver (optional)</label>
+
+
+                      <div onclick="showInfo()" class="popup">
+                        <img id="infoPic" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/1024px-Infobox_info_icon.svg.png" style="height:20px;margin-left:5px;margin-bottom:-4px">
+                        <span class="popuptext" id="driverInfoBox"> Extra information for the driver. Eg. door code or fragile package. </span>
+                      </div>
+
+                      <input type="text" id="driverInstructions" placeholder=""
+                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="form-control">
+                    </div>
+
+
                     <div class="col-md-2 mb-3" style="width: 150px; padding-left: 0px;"><label for="expressButton">Express
                         Delivery</label> <input id="expressButton" type="checkbox" name="express" value="express"
                         data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="checkbox"></div>
@@ -204,7 +271,7 @@
                       Please enter receivers phone number.
                     </div>
                   </div>
-                  <div class="mb-info-6"><label for="receverEmail">Email Reciver (Optional)</label> <input type="text"
+                  <div class="mb-info-6"><label for="receverEmail">Email Receiver (Optional)</label> <input type="text"
                       id="receverEmail" placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
                       class="form-control" v-model="receverEmail">
                   </div>
@@ -424,7 +491,11 @@
       );
     });
   </script>
-
+  <script> function showInfo() {
+    var popup =
+    document.getElementById("driverInfoBox");
+    popup.classList.toggle("show");
+  } </script>
 </body>
 
 </html>

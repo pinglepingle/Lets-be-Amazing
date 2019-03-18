@@ -502,7 +502,9 @@ ul {
     padding-left: 55px;
 }
 
-
+#driverInfoBox {
+  font-size: 12px;
+}
 
 
 
@@ -660,7 +662,6 @@ button, select {
     border-radius: 50%;
 }
 
-
 #my-map {
     position: absolute;
     top: 115%;
@@ -671,6 +672,7 @@ button, select {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
     margin: 1em auto;
 }
+
 
 footer {
     position: relative;
