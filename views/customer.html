@@ -55,8 +55,6 @@
           <!-- <div id="my-map"></div><br> -->
           <br><br>
         </div>
-
-
         <div class="col-md-8 order-md-1">
           <form novalidate="novalidate" class="needs-validation">
             <div class="payment-cont">
@@ -73,13 +71,13 @@
                       </div>
                       <div class="packageContainer packageSmall"><img src="img/medium.png" id="mediumBox">
                         <div class="packageText">
-                          <h6 class="packageHeading">Medium</h6> <span>An all-round package</span>
+                          <h6 class="packageHeading">Medium</h6> <span>Medium package</span>
                           <p>34x30x30 cm</p>
                         </div> <span class="packagePrice"> 99 sek </span>
                       </div>
                       <div class="packageContainer packageSmall"><img src="img/bigbox.png" id="bigBox">
                         <div class="packageText">
-                          <h6 class="packageHeading">Large</h6> <span>Packs a heck of a punch</span>
+                          <h6 class="packageHeading">Large</h6> <span>Heavy package</span>
                           <p>64x110x110 cm</p>
                         </div> <span class="packagePrice"> 139 sek </span>
                       </div>
@@ -91,24 +89,24 @@
                   <div class="row">
                     <div class="col-md-8 mb-3" style="padding-left: 0px; margin-left: 0px;"><label for="driverInstructions">Driver
                         instruction</label> <input type="text" id="driverInstructions" placeholder=""
-                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="form-control"></div>
+                        ></div>
                     <div class="col-md-2 mb-3" style="width: 150px; padding-left: 0px;"><label for="expressButton">Express
-                        Delivery</label> <input id="expressButton" type="checkbox" name="express" value="express"
-                        data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10" class="checkbox"></div>
+                        Delivery</label> <input id="expressButton" type="checkbox" name="express" value="express" v-on:click="toggleExpress"
+                        ></div>
                   </div>
                 </div>
                 <div class="senderInfoBox split-2">
                   <h4 class="mb-info-3">Sender info</h4>
                   <div class="row">
                     <div class="mb-info-3"><label for="senderFirstName">First name </label> <input type="text" id="senderFirstName"
-                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        placeholder="" value="" required="required"
                         class="form-control" v-model="senderFirstName">
                       <div class="invalid-feedback">
                         Please enter your first name
                       </div>
                     </div>
                     <div class="mb-info-3"><label for="senderLastName">Last name </label> <input type="text" id="senderLastName"
-                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        placeholder="" value="" required="required"
                         class="form-control" v-model="senderLastName">
                       <div class="invalid-feedback">
                         Please enter your last name
@@ -116,7 +114,7 @@
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="senderAddress">Address </label> <input type="text" id="senderAddress"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      placeholder="" required="required"
                       class="form-control" v-model="senderAddress">
                     <div class="invalid-feedback">
                       Please enter your pickup address.
@@ -124,14 +122,14 @@
                   </div>
                   <div class="row">
                     <div class="mb-info-3"><label for="senderZipcode">Zip code </label> <input type="text" id="senderZipcode"
-                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        placeholder="" required="required"
                         class="form-control" v-model="senderZipcode">
                       <div class="invalid-feedback">
                         Please enter your pickup address.
                       </div>
                     </div>
                     <div class="mb-info-3"><label for="senderCity">City </label> <input type="text" id="senderCity"
-                        placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        placeholder="" required="required"
                         class="form-control" v-model="senderCity">
                       <div class="invalid-feedback">
                         Please enter a city.
@@ -139,15 +137,15 @@
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="senderNumber">Phone Number</label> <input type="text" id="senderNumber"
-                      placeholder="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      placeholder="" required="required"
                       class="form-control" v-model="senderNumber">
                     <div class="invalid-feedback">
                       Please enter your phone number.
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="senderEmail">Email Sender <span class="text-muted"></span></label>
-                    <input type="email" id="senderEmail" placeholder="" required="required" data-kwimpalastatus="alive"
-                      data-kwimpalaid="1551021057611-9" class="form-control" v-model="senderEmail">
+                    <input type="email" id="senderEmail" placeholder="" required="required"
+                      >
                     <div class="invalid-feedback">
                       Please enter a valid email address
                     </div>
@@ -160,14 +158,14 @@
                   <h4 class="mb-info-3">Receiver info</h4>
                   <div class="row">
                     <div class="mb-info-3"><label for="receverFirstName">First name </label> <input type="text" id="receverFirstName"
-                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        placeholder="" value="" required="required"
                         class="form-control" v-model="receverFirstName">
                       <div class="invalid-feedback">
                         Please enter your first name
                       </div>
                     </div>
                     <div class="mb-info-3"><label for="receverLastName">Last name </label> <input type="text" id="receverLastName"
-                        placeholder="" value="" required="required" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-6"
+                        placeholder="" value="" required="required"
                         class="form-control" v-model="receverLastName">
                       <div class="invalid-feedback">
                         Please enter your last name
@@ -175,7 +173,7 @@
                     </div>
                   </div>
                   <div class=" mb-info-6"><label for="receverAddress">Address </label> <input type="text" id="receverAddress"
-                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      placeholder=""
                       class="form-control" v-model="receverAddress">
                     <div class="invalid-feedback">
                       Please enter your pickup address.
@@ -183,14 +181,14 @@
                   </div>
                   <div class="row">
                     <div class="mb-info-3"><label for="receverZipCode">Zip code </label> <input type="text" id="receverZipCode"
-                        placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        placeholder=""
                         class="form-control" v-model="receverZipCode">
                       <div class="invalid-feedback">
                         Please enter your pickup address.
                       </div>
                     </div>
                     <div class="mb-info-3"><label for="receverCity">City </label> <input type="text" id="receverCity"
-                        placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                        placeholder=""
                         class="form-control" v-model="receverCity">
                       <div class="invalid-feedback">
                         Please enter a city.
@@ -198,14 +196,14 @@
                     </div>
                   </div>
                   <div class=" mb-info-6"><label for="receverNumber">Phone Number</label> <input type="text" id="receverNumber"
-                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      placeholder=""
                       class="form-control" v-model="receverNumber">
                     <div class="invalid-feedback">
                       Please enter receivers phone number.
                     </div>
                   </div>
                   <div class="mb-info-6"><label for="receverEmail">Email Reciver (Optional)</label> <input type="text"
-                      id="receverEmail" placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-10"
+                      id="receverEmail" placeholder=""
                       class="form-control" v-model="receverEmail">
                   </div>
                 </div>
@@ -225,14 +223,14 @@
                 <h4 class="mb-info-3">Sender info</h4>
                 <div class="row">
                   <div class="mb-info-3" style="padding-right: 35px;"><label for="ccname">Name on card</label> <input type="text" id="ccname"
-                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-13"
+                      placeholder=""
                       class="form-control" v-model="ccname"> <small class="text-muted">Full name as displayed on card</small>
                     <div class="invalid-feedback">
                       Name on card is required
                     </div>
                   </div>
                   <div class="mb-info-3" style="padding-left: 35px;"><label for="ccnumber">Credit card number</label> <input type="number" id="ccnumber"
-                      placeholder="" data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-14"
+                      placeholder=""
                       class="form-control" v-model="ccnumber">
                     <div class="invalid-feedback">
                       Credit card number is required
@@ -247,7 +245,7 @@
                     </div>
                   </div>
                   <div class="mb-info-3" style="padding-left: 35px;"><label for="cccvv">CVV</label> <input type="number" id="cccvv" placeholder=""
-                      data-kwimpalastatus="alive" data-kwimpalaid="1551021057611-15" class="form-control" v-model="cccvv">
+                      >
                     <div class="invalid-feedback">
                       Security code required
                     </div>

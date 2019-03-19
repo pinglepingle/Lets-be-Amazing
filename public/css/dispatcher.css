@@ -12,6 +12,8 @@ body {
     grid-column-gap: 1%;
 }
 
+
+
 #orderColumns > #field {
     display: inline-grid;
     grid-template-columns: 10% 10% 30% 35% 15%;
@@ -35,6 +37,7 @@ body {
 }
 
 #fieldPackages {
+    padding-top: 1px;
     grid-column: 1 / 1;
     grid-row: 2 / 2;
     overflow-y: auto;
@@ -43,6 +46,7 @@ body {
 }
 
 #inStorage {
+    padding-top: 1px;
     grid-column: 1 / 1;
     grid-row: 4 / 4;
     overflow-y: auto;
@@ -56,10 +60,12 @@ body {
     grid-template-columns: 10% 10% 35% 35% 10%;
     grid-template-rows: 100%;
     background-color: #eee;
-    width: 100%;
+    width: 99%;
     border-style: solid;
     border-color: #ddd;
     border-width: 2px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
 }
 
 .order > span {
@@ -68,16 +74,27 @@ body {
     align-items: center;
 }
 
+#fieldPackages .order {
+    border-color: #8aacb8;
+}
+
+#inStorage .order {
+    border-color: #8ab8ac;
+}
+
 .driv {
     height: 30px;
     background-color: #eee;
-    width: 100%;
+    width: calc(100% - 4px);
     border-style: solid;
     border-color: #ddd;
     border-width: 2px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
 }
 
 #cars0 {
+    padding-top: 1px;
     grid-column: 2;
     grid-row: 2;
     overflow-y: auto;
@@ -87,12 +104,21 @@ body {
 }
 
 #cars1 {
+    padding-top: 1px;
     grid-column: 2;
     grid-row: 4;
     overflow-y: auto;
     overflow-x: none;
     background-color: #8ab8ac;
     height: 90%;
+}
+
+#cars0 .driv {
+    border-color: #8aacb8;
+}
+
+#cars1 .driv {
+    border-color: #8ab8ac;
 }
 
 #driver0 {
@@ -140,13 +166,25 @@ body {
     width: 100%;
     margin-top: auto;
     border-radius: 0;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
     cursor: not-allowed;
     border-style: none;
 }
 
 .confirmcar:hover {
-    background-color: lime;
+    background-color: lightgreen;
     color: black;
+}
+
+.pickedUp {
+    background-color: lightgreen;
+    border-color: #8aacb8;
+}
+
+.waitingForPickup {
+    background-color: lightblue;
+    border-color: #8aacb8;
 }
 
 #my-map {

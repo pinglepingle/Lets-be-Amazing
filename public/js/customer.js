@@ -4,7 +4,7 @@ var socket = io();
 var vm = new Vue({
     el: '#main',
     data: {
-        status: null, // 0 is pickup, 1 is in car, 2 is in storage
+        status: null, // 1 is in car
         express: null,
         orderId: null,
         map: null,
@@ -21,12 +21,14 @@ var vm = new Vue({
         senderCity: "",
         senderNumber: "",
         senderEmail: "",
+        senderAddress: "",
         receverFirstName: "",
         receverLastName: "",
         receverZipcode: "",
         receverCity: "",
         receverNumber: "",
         receverEmail: "",
+        receverAddress: "",
         ccname: "",
         ccnumber: "",
         ccexpiration: "",
@@ -132,6 +134,7 @@ var vm = new Vue({
                         senderFirstName:    this.senderFirstName,
                         senderLastName:     this.senderLastName,
                         senderZipcode:      this.senderZipcode,
+                        senderAddress:      this.senderAddress,
                         senderCity:         this.senderCity,
                         senderNumber:       this.senderNumber,
                         senderEmail:        this.senderEmail,
@@ -140,6 +143,7 @@ var vm = new Vue({
                         receverZipcode:     this.receverZipcode,
                         receverCity:        this.receverCity,
                         receverNumber:      this.receverNumber,
+                        receverAddress:     this.senderAddress,
                         receverEmail:       this.receverEmail,
                         ccname:             this.ccname,
                         ccnumber:           this.ccnumber,
@@ -387,7 +391,7 @@ var vm = new Vue({
       } else {
         return [this.fromMarker.getLatLng(), this.baseMarker.getLatLng(), this.destMarker.getLatLng()];
       }
-      
+
     created: function () {
         socket.on('initialize', function (data) {
             // add marker for home base in the map
