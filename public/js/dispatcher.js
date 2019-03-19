@@ -150,7 +150,7 @@ var vm = new Vue({
             let selectedOrders = [];
             for (var i = 0; i < this.selectedFieldPackages.length; i++) {
                 let order = this.orders[Number(this.selectedFieldPackages[i])];
-                order.driverId = this.selectedFieldCar;
+                order.driverId = Number(this.selectedFieldCar);
                 order.orderDetails.status = 1;
                 selectedOrders.push(order);
             }
@@ -177,7 +177,7 @@ var vm = new Vue({
             let selectedOrders = [];
             for (var i = 0; i < this.selectedStoragePackages.length; i++) {
                 let order = this.orders[Number(this.selectedStoragePackages[i])];
-                order.driverId = this.selectedStorageCar;
+                order.driverId = Number(this.selectedStorageCar);
                 order.orderDetails.status = 1;
                 selectedOrders.push(order);
             }

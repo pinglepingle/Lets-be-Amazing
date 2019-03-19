@@ -23,7 +23,7 @@
       <div id="my-map"></div>
       <br><br>
       <ul id="orderinfo">
-        <div v-for="(order,costumerId) in orders" v-if="order.driverId == driverId">
+        <div v-for="(order,costumerId) in orders" v-if="order.driverId === driverId">
           <ul>
             <li v-for="(detail, key) in order.orderDetails">
               {{ key + ": " + detail }}
@@ -36,8 +36,10 @@
 
       <div id="orderbox">
         <div v-for="order in orders">
-          <div v-if="order.driverId === this.driverId">
+          <div v-if="order.driverId === driverId">
             <button v-on:click="togglePackageInfo" class="collapsible">
+              <span v-if="order.orderDetails.status === 1">🕒</span>
+              <span v-else-if="order.orderDetails.status === 2">🚗</span>
               {{ order.orderDetails.origin === 0 ? order.orderDetails.senderAddress : "Lager" }} ➝
               {{ order.orderDetails.origin === 0 ? (order.orderDetails.express ? order.receverAddress : "Lager" ) : order.orderDetails.receverAddress }}</button>
             <div class="content">

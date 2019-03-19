@@ -25,11 +25,11 @@
         <div id="fieldPackages">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.origin === 0" v-bind:class="{ pickedUp: order.orderDetails.status === 2, waitingForPickup: order.orderDetails.status === 1, order: true }">
-              <div v-if="order.orderDetails.status === 1" style="grid-column 1 / 1; display: flex; justify-content: center;">
-                🕒
+              <div v-if="order.orderDetails.status === 1" style="grid-column 1 / 1; display: flex; justify-content: center; align-items: center;">
+                🕒<b>{{ order.driverId }}</b>
               </div>
-              <div v-else-if="order.orderDetails.status === 2" style="grid-column 1 / 1; display: flex; justify-content: center;">
-                🚗
+              <div v-else-if="order.orderDetails.status === 2" style="grid-column 1 / 1; display: flex; justify-content: center; align-items: center;">
+                🚗<b>{{ order.driverId }}</b>
               </div>
               <input v-else="" style="grid-column 1 / 1; display: flex; justify-content: center;" type="checkbox" name="fieldOrdersCheckbox" v-on:click="adjustFieldPackages"></input>
               <span style="grid-column: 2 / 2;">{{ order.orderId }}</span>
@@ -47,11 +47,11 @@
         <div id="inStorage">
           <div v-for="order in orders">
             <div v-if="order.orderDetails.origin === 1" v-bind:class="{ pickedUp: order.orderDetails.status === 2, waitingForPickup: order.orderDetails.status === 1, order: true }">
-              <div v-if="order.orderDetails.status === 1" style="grid-column 1 / 1; display: flex; justify-content: center;">
-                🕒
+              <div v-if="order.orderDetails.status === 1" style="grid-column 1 / 1; display: flex; justify-content: center; align-items: center;">
+                🕒<b>{{ order.driverId }}</b>
               </div>
-              <div v-else-if="order.orderDetails.status === 2" style="grid-column 1 / 1; display: flex; justify-content: center;">
-                🚗
+              <div v-else-if="order.orderDetails.status === 2" style="grid-column 1 / 1; display: flex; justify-content: center; align-items: center;">
+                🚗<b>{{ order.driverId }}</b>
               </div>
               <input v-else="" style="grid-column 1 / 1; display: flex; justify-content: center;" type="checkbox" name="fieldOrdersCheckbox" v-on:click="adjustStoragePackages"></input>
               <span style="grid-column: 2 / 2;">{{ order.orderId }}</span>

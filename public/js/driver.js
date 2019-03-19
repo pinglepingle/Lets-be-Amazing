@@ -155,9 +155,6 @@ var vm = new Vue({
             socket.emit('orderDroppedOff', order.orderId);
 
             Vue.delete(this.orders, order.orderId);
-            this.map.removeLayer(this.customerMarkers[order.orderId].from);
-            this.map.removeLayer(this.customerMarkers[order.orderId].dest);
-            this.map.removeLayer(this.customerMarkers[order.orderId].line);
             Vue.delete(this.customerMarkers[order.orderId]);
         },
         getPolylinePoints: function (order) {
