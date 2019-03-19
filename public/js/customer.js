@@ -40,7 +40,7 @@ var vm = new Vue({
     },
     created: function () {
         socket.on('initialize', function (data) {
-            
+
         }.bind(this));
         socket.on('orderId', function (orderId) {
             this.orderId = orderId;
@@ -48,25 +48,7 @@ var vm = new Vue({
     },
     methods: {
         placeOrder: function (event) {
-            if (this.senderFirstName !== "" &&
-                this.senderLastName !== "" &&
-                this.senderAddress !== "" &&
-                this.senderZipcode !== "" &&
-                this.senderCity !== ""  &&
-                this.senderNumber !== ""  &&
-                this.senderEmail !== ""  &&
-                this.receverFirstName !== "" &&
-                this.receverLastName !== "" &&
-                this.receverAddress !== "" &&
-                this.receverZipcode !== "" &&
-                this.receverCity !== "" &&
-                this.receverNumber !=="" &&
-                this.ccname !== "" &&
-                this.ccnumber !== "" &&
-                this.ccexpiration !== "" &&
-                this.cccvv !== "") 
             {
-
                 socket.emit("placeOrder", {
                     fromLatLong: [59.8490512210841, 17.600974144749024],
                     destLatLong: [59.8490512210841, 17.600974144749024],
@@ -103,9 +85,6 @@ var vm = new Vue({
                     }
                 });
             }
-
-
-
         },
         toggleExpress: function (event) {
             if (this.express == true) {
@@ -133,39 +112,6 @@ var vm = new Vue({
 
         SelectPackage: function (event) {
 
-        }, 
+        },
     },
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
