@@ -205,19 +205,19 @@ var vm = new Vue({
             document.getElementById('swish').style.display = 'none';
             document.getElementById('invoice').style.display = 'none';
         },
-        invoice: function (event) {
-            document.getElementById('invoice').style.display = 'block';
-            document.getElementById('swish').style.display = 'none';
-            document.getElementById('creditCard').style.display = 'none';
+        invoice: function(event) {
+            document.getElementById('invoice').style.display ='block';
+            document.getElementById('swish').style.display ='none';
+            document.getElementById('creditCard').style.display ='none';
         },
-
-        SelectPackage: function (event) {
-
+        showInfo: function(event) {
+          document.getElementById('driverInfoBox').style.display='block';
         }
 
 
 
     }
+
 });
 
 
