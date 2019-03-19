@@ -146,8 +146,59 @@ var vm = new Vue({
             var connectMarkers = L.polyline(this.getPolylinePoints(order), {color: 'blue'}).addTo(this.map);
             return {from: fromMarker, dest: destMarker, line: connectMarkers};
         },
-        assignDriver: function (order) {
-            socket.emit("driverAssigned", order);
+        assignFieldDriver: function () {
+            let selectedOrders = [];
+            for (var i = 0; i < this.selectedFieldPackages.length; i++) {
+                let order = this.orders[Number(this.selectedFieldPackages[i])];
+                order.driverId = Number(this.selectedFieldCar);
+                order.orderDetails.status = 1;
+                selectedOrders.push(order);
+            }
+
+            for (var i = 0; i < selectedOrders.length; i++) {
+                let order = selectedOrders[i];
+                socket.emit("driverAssigned", order);
+            }
+
+            let checkboxes = document.getElementsByName("fieldOrdersCheckbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+
+            let drivers = document.getElementsByName("fieldDrivers");
+            for (var i = 0; i < drivers.length; i++) {
+                drivers[i].checked = false;
+            }
+
+            this.selectedFieldPackages = [];
+            this.selectedFieldCar = null;
+        },
+        assignStorageDriver: function () {
+            let selectedOrders = [];
+            for (var i = 0; i < this.selectedStoragePackages.length; i++) {
+                let order = this.orders[Number(this.selectedStoragePackages[i])];
+                order.driverId = Number(this.selectedStorageCar);
+                order.orderDetails.status = 1;
+                selectedOrders.push(order);
+            }
+
+            for (var i = 0; i < selectedOrders.length; i++) {
+                let order = selectedOrders[i];
+                socket.emit("driverAssigned", order);
+            }
+
+            let checkboxes = document.getElementsByName("storageOrdersCheckbox");
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+
+            let drivers = document.getElementsByName("storageDrivers");
+            for (var i = 0; i < drivers.length; i++) {
+                drivers[i].checked = false;
+            }
+
+            this.selectedStoragePackages = [];
+            this.selectedStorageCar = null;
         },
         adjustFieldPackages: function (click) {
             var checkmark = click.target;
@@ -158,7 +209,6 @@ var vm = new Vue({
                 let index = this.selectedFieldPackages.indexOf(id);
                 this.selectedFieldPackages.splice(index, 1);
             }
-            console.log(this.selectedFieldPackages);
         },
         adjustStoragePackages: function (click) {
             var checkmark = click.target;

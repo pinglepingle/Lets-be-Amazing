@@ -142,35 +142,21 @@ var vm = new Vue({
                 alert("Can't quit, still have packages in your truck");
         },
         orderPickedUp: function (order) {
-            var pickUp = this.orders.orderId;
-            // this.orders
-            // Update used capacity
             if (Number(this.usedCapacity) + Number(order.orderDetails.spaceRequired) > Number(this.maxCapacity))
                 return;
             else {
                 this.usedCapacity = Number(order.orderDetails.spaceRequired) + Number(this.usedCapacity);
-                order.handled = true;
             }
 
-            // TODO: Update polyline, remove last segment
             socket.emit("orderPickedUp", order);
         },
-
         orderDroppedOff: function (order) {
-            console.log("orderDroppedOff");
-            // Update used capacity
             this.usedCapacity -= Number(order.orderDetails.spaceRequired);
+            socket.emit('orderDroppedOff', order.orderId);
 
             Vue.delete(this.orders, order.orderId);
-            this.map.removeLayer(this.customerMarkers[order.orderId].from);
-            this.map.removeLayer(this.customerMarkers[order.orderId].dest);
-            this.map.removeLayer(this.customerMarkers[order.orderId].line);
             Vue.delete(this.customerMarkers[order.orderId]);
-            socket.emit('orderDroppedOff', order.orderId);
         },
-        // TODO: express and processed need to be separated to properly represent a
-        // non-express processed order (i.e. a regular order when going from the distribution
-        // terminal to final destination)
         getPolylinePoints: function (order) {
             if (order.expressOrAlreadyProcessed) {
                 return [order.fromLatLong, order.destLatLong];
@@ -194,7 +180,7 @@ var vm = new Vue({
               content.style.maxHeight = null;
             } else {
               content.style.maxHeight = content.scrollHeight + "px";
-            } 
+            }
     /*if (content.style.display === "block") {
                 content.style.display = "none";
             } else {

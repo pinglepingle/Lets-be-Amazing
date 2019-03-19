@@ -154,8 +154,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('orderPickedUp', function(order) {
-        if (order.orderDetails.status === 0 || order.orderDetails.status === 2)
-            order.orderDetails.status = 1;
+        order.orderDetails.status = 2;
 
         console.log("Order",order.orderId,"was picked up");
         data.updateOrderDetails(order);
@@ -175,7 +174,7 @@ io.on('connection', function (socket) {
                 data.orderDropOff(orderId);
                 io.emit('orderDroppedOff', orderId);
             } else {
-                order.orderDetails.status = 2; // It's now in the warehouse
+                order.orderDetails.status = 0; // It's now in the warehouse
                 order.orderDetails.origin = 1; // It's origin is now in the warehouse
                 order.driverId = null;
                 data.updateOrderDetails(order);
